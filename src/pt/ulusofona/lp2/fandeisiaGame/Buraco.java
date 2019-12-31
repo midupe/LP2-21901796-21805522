@@ -10,4 +10,16 @@ public class Buraco {
         this.x = x;
         this.y = y;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
