@@ -34,7 +34,7 @@ public class Creature {
         this.equipa = equipa;
         this.orientacao = orientacao;
         this.imagem = getImagePNG();
-        this.tipof = tipo;
+        tipof = tipo;
         if (tipo.equals("Anão")){
             tipof = "Anao";
             alcance = 1;
@@ -62,6 +62,7 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
+        getImagePNG();
     }
 
     public int getCusto() {
@@ -69,8 +70,8 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        //imagem = tipof + "_" + orientacao;
-        return null;
+        imagem = tipof + "_" + orientacao + ".png";
+        return imagem;
     }
 
     public int getId() {
