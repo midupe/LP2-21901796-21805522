@@ -125,12 +125,27 @@ public class FandeisiaGameManager {
             tabuleiro[x][y] = id;
         }
         if (moedasRESISTENCIA < 0 && moedasLDR < 0) {
+            criaturas.removeAll(criaturas);
+            tesouros.removeAll(tesouros);
+            buracos.removeAll(buracos);
+            moedasLDR = 50;
+            moedasRESISTENCIA = 50;
             return 1;
         }
         if (moedasRESISTENCIA < 0) {
+            criaturas.removeAll(criaturas);
+            tesouros.removeAll(tesouros);
+            buracos.removeAll(buracos);
+            moedasLDR = 50;
+            moedasRESISTENCIA = 50;
             return 3;
         }
         if (moedasLDR < 0) {
+            criaturas.removeAll(criaturas);
+            tesouros.removeAll(tesouros);
+            buracos.removeAll(buracos);
+            moedasLDR = 50;
+            moedasRESISTENCIA = 50;
             return 2;
         }
         turnos = 0;

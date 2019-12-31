@@ -33,8 +33,8 @@ public class Creature {
         this.y = y;
         this.equipa = equipa;
         this.orientacao = orientacao;
-        this.imagem = getImagePNG();
         tipof = tipo;
+        this.imagem = getImagePNG();
         if (tipo.equals("Anão")){
             tipof = "Anao";
             alcance = 1;
