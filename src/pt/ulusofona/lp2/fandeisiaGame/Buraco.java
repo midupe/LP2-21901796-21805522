@@ -1,0 +1,13 @@
+package pt.ulusofona.lp2.fandeisiaGame;
+
+public class Buraco {
+    int id;
+    int x;
+    int y;
+
+    public Buraco(int id, int x, int y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+    }
+}
