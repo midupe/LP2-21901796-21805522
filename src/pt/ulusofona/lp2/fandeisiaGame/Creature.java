@@ -26,7 +26,7 @@ public class Creature {
         return tipo;
     }
 
-    public Creature(int id, String tipo, int x, int y, int equipa, String orientacao) {
+    public Creature(int id, String tipo, int equipa, int x, int y, String orientacao) {
         this.id = id;
         this.tipo = tipo;
         this.x = x;

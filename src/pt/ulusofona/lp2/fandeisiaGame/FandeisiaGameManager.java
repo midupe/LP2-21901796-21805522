@@ -287,5 +287,7 @@ public class FandeisiaGameManager {
         return "Éderzito António Macedo Lopes";
     }
 
-    //public void toggleAI(boolean active) {}
+    public void toggleAI(boolean active) {
+        //Implementar
+    }
 }
