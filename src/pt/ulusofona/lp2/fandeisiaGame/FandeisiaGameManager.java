@@ -3,22 +3,23 @@ package pt.ulusofona.lp2.fandeisiaGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class FandeisiaGameManager {
 
-    ArrayList<Creature> criaturas = new ArrayList<>();
-    ArrayList<Tesouro> tesouros = new ArrayList<>();
-    ArrayList<Buraco> buracos = new ArrayList<>();
+    ArrayList<Creature> criaturas;
+    ArrayList<Tesouro> tesouros;
+    ArrayList<Buraco> buracos;
     int widthX;
     int heightY;
 
     int[][] tabuleiro;
-    int moedasLDR = 50;
-    int moedasRESISTENCIA = 50;
+    int moedasLDR;
+    int moedasRESISTENCIA;
     int turnos;
     int currentTeam;
-    int tesouroApanhadoCurrentTurn = 0;
+    int tesouroApanhadoCurrentTurn;
 
     public FandeisiaGameManager() {}
 
@@ -93,6 +94,11 @@ public class FandeisiaGameManager {
     public int startGame(String[] content, int rows, int columns) {
         this.widthX = columns - 1;
         this.heightY = rows - 1;
+        moedasLDR = 50;
+        moedasRESISTENCIA = 50;
+        criaturas = new ArrayList<>();
+        tesouros = new ArrayList<>();
+        buracos = new ArrayList<>();
         tabuleiro = new int[rows][columns];
         for (String object : content) {
             String[] data = object.split(",");
@@ -126,27 +132,12 @@ public class FandeisiaGameManager {
             tabuleiro[y][x] = id;
         }
         if (moedasRESISTENCIA < 0 && moedasLDR < 0) {
-            criaturas.removeAll(criaturas);
-            tesouros.removeAll(tesouros);
-            buracos.removeAll(buracos);
-            moedasLDR = 50;
-            moedasRESISTENCIA = 50;
             return 1;
         }
         if (moedasRESISTENCIA < 0) {
-            criaturas.removeAll(criaturas);
-            tesouros.removeAll(tesouros);
-            buracos.removeAll(buracos);
-            moedasLDR = 50;
-            moedasRESISTENCIA = 50;
             return 3;
         }
         if (moedasLDR < 0) {
-            criaturas.removeAll(criaturas);
-            tesouros.removeAll(tesouros);
-            buracos.removeAll(buracos);
-            moedasLDR = 50;
-            moedasRESISTENCIA = 50;
             return 2;
         }
         turnos = -1;
@@ -208,6 +199,7 @@ public class FandeisiaGameManager {
                             creature.setOrientacao("Norte");
                         }
                     }
+                    creature.getImagePNG();
                 }
             }
         }

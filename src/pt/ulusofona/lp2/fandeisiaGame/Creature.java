@@ -95,7 +95,8 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
-        this.imagem = tipof + "_" + orientacao + ".png";
+        this.imagem = (tipof + "_" + orientacao + ".png");
+        this.getImagePNG();
     }
 
     public int getCusto() {
@@ -103,7 +104,7 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        //return imagem; --ESTA COM BUG implementar
+        //return imagem; //ESTA COM BUG
         return null;
     }
 
