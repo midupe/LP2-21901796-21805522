@@ -91,9 +91,9 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
-        this.widthX = columns - 1;
-        this.heightY = rows - 1;
-        tabuleiro = new int[columns][rows];
+        this.widthX = rows - 1;
+        this.heightY = columns - 1;
+        tabuleiro = new int[rows][columns];
         for (String object : content) {
             String[] data = object.split(",");
             int id = Integer.parseInt(data[0].replace("id: ", ""));
@@ -123,7 +123,7 @@ public class FandeisiaGameManager {
                     moedasRESISTENCIA -= creature.getCusto();
                 }
             }
-            tabuleiro[x][y] = id;
+            tabuleiro[y][x] = id;
         }
         if (moedasRESISTENCIA < 0 && moedasLDR < 0) {
             criaturas.removeAll(criaturas);
@@ -276,7 +276,7 @@ public class FandeisiaGameManager {
     }
 
     public int getElementId(int x, int y) {
-        return tabuleiro[x][y];
+        return tabuleiro[y][x];
     }
 
     public int getCurrentTeamId() {
@@ -311,21 +311,21 @@ public class FandeisiaGameManager {
                 if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1) && !temCriatura(x, y-1)){
                     if (gastarMoedas(1)) {
                         moverCriatura(id, x, y - 1);
-                        tabuleiro[x][y] = 0;
+                        tabuleiro[y][x] = 0;
                         return true;
                     }
                 }
                 if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y) && !temCriatura(x+1, y)){
                     if (gastarMoedas(1)) {
                         moverCriatura(id, x + 1, y);
-                        tabuleiro[x][y] = 0;
+                        tabuleiro[y][x] = 0;
                         return true;
                     }
                 }
                 if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1) && !temCriatura(x, y+1)){
                     if (gastarMoedas(1)) {
                         moverCriatura(id, x, y + 1);
-                        tabuleiro[x][y] = 0;
+                        tabuleiro[y][x] = 0;
                         return true;
                     }
                 }
@@ -333,7 +333,7 @@ public class FandeisiaGameManager {
                 if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y) && !temCriatura(x-1, y)){
                     if (gastarMoedas(1)) {
                         moverCriatura(id, x - 1, y);
-                        tabuleiro[x][y] = 0;
+                        tabuleiro[y][x] = 0;
                         return true;
                     }
                 }
@@ -451,7 +451,7 @@ public class FandeisiaGameManager {
             if (creature.getId() == id) {
                 creature.setX(x);
                 creature.setY(y);
-                tabuleiro[x][y] = id;
+                tabuleiro[y][x] = id;
             }
         }
     }
@@ -494,10 +494,10 @@ public class FandeisiaGameManager {
                     irY = y;
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
-                    if (tabuleiro[irX][irY] != 0) {
+                    if (tabuleiro[irY][irX] != 0) {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
                         for (Tesouro tesouro : tesouros) {
-                            if (tabuleiro[irX][irY] == tesouro.getId()) {
+                            if (tabuleiro[irY][irX] == tesouro.getId()) {
                                 tesouroApanhadoCurrentTurn++;
                                 creature.adicionarPonto();
                                 tesouroApanhado = true;
@@ -506,11 +506,11 @@ public class FandeisiaGameManager {
                         }
                         tesouros.removeAll(toRemove);
                     }
-                    if (tabuleiro[irX][irY] == 0 || tesouroApanhado) {
+                    if (tabuleiro[irY][irX] == 0 || tesouroApanhado) {
                         creature.setX(irX);
                         creature.setY(irY);
-                        tabuleiro[x][y] = 0;
-                        tabuleiro[irX][irY] = id;
+                        tabuleiro[y][x] = 0;
+                        tabuleiro[irY][irX] = id;
                         return true;
                     }
                 }
