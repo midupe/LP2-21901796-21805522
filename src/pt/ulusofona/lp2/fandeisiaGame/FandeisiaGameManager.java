@@ -91,8 +91,8 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
-        this.widthX = rows - 1;
-        this.heightY = columns - 1;
+        this.widthX = columns - 1;
+        this.heightY = rows - 1;
         tabuleiro = new int[rows][columns];
         for (String object : content) {
             String[] data = object.split(",");
@@ -451,7 +451,16 @@ public class FandeisiaGameManager {
             if (creature.getId() == id) {
                 creature.setX(x);
                 creature.setY(y);
+                List<Tesouro> toRemove = new ArrayList<Tesouro>();
+                for (Tesouro tesouro : tesouros) {
+                    if (tabuleiro[y][x] == tesouro.getId()) {
+                        tesouroApanhadoCurrentTurn++;
+                        creature.adicionarPonto();
+                        toRemove.add(tesouro);
+                    }
+                }
                 tabuleiro[y][x] = id;
+                tesouros.removeAll(toRemove);
             }
         }
     }
