@@ -270,41 +270,64 @@ public class FandeisiaGameManager {
         for (Creature creature: criaturas){
             if (creature.getX() == x && y == creature.getY()) {
                 int id = creature.getId();
-                if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1)){
-                    moverCriatura(id, x, y-1);
-                    tabuleiro[x][y] = 0;
-                    return true;
+                if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1) && !temCriatura(x, y-1)){
+                    if (gastarMoedas(1)) {
+                        moverCriatura(id, x, y - 1);
+                        tabuleiro[x][y] = 0;
+                        return true;
+                    }
                 }
-                if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y)){
-                    moverCriatura(id, x+1, y);
-                    tabuleiro[x][y] = 0;
-                    return true;
+                if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y) && !temCriatura(x+1, y)){
+                    if (gastarMoedas(1)) {
+                        moverCriatura(id, x + 1, y);
+                        tabuleiro[x][y] = 0;
+                        return true;
+                    }
                 }
-                if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1)){
-                    moverCriatura(id, x, y+1);
-                    tabuleiro[x][y] = 0;
-                    return true;
+                if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1) && !temCriatura(x, y+1)){
+                    if (gastarMoedas(1)) {
+                        moverCriatura(id, x, y + 1);
+                        tabuleiro[x][y] = 0;
+                        return true;
+                    }
                 }
 
-                if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y)){
-                    moverCriatura(id, x-1, y);
-                    tabuleiro[x][y] = 0;
-                    return true;
+                if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y) && !temCriatura(x-1, y)){
+                    if (gastarMoedas(1)) {
+                        moverCriatura(id, x - 1, y);
+                        tabuleiro[x][y] = 0;
+                        return true;
+                    }
                 }
                 if (spellName.equals("ReduzAlcance")){
-                    return true;
+                    if (gastarMoedas(2)) {
+                        //Implementar
+                        return true;
+                    }
                 }
                 if (spellName.equals("DuplicaAlcance")){
-                    return true;
+                    if (gastarMoedas(3)) {
+                        //Implementar
+                        return true;
+                    }
                 }
                 if (spellName.equals("Congela")){
-                    return true;
+                    if (gastarMoedas(3)) {
+                        //Implementar
+                        return true;
+                    }
                 }
                 if (spellName.equals("Congela4Ever")){
-                    return true;
+                    if (gastarMoedas(10)) {
+                        //Implementar
+                        return true;
+                    }
                 }
                 if (spellName.equals("Descongela")){
-                    return true;
+                    if (gastarMoedas(8)) {
+                        //Implementar
+                        return true;
+                    }
                 }
             }
         }
@@ -376,6 +399,15 @@ public class FandeisiaGameManager {
         return false;
     }
 
+    public boolean temCriatura(int x, int y){
+        for (Creature creature: criaturas){
+            if (creature.getX() == x && creature.getY() == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void moverCriatura (int id, int x, int y){
         for (Creature creature: criaturas) {
             if (creature.getId() == id) {
@@ -384,5 +416,16 @@ public class FandeisiaGameManager {
                 tabuleiro[x][y] = id;
             }
         }
+    }
+
+    public boolean gastarMoedas (int quantidade) {
+        if (currentTeam == 10 && moedasLDR >= quantidade) {
+            moedasLDR -= quantidade;
+            return true;
+        }
+        if (currentTeam == 20 && moedasRESISTENCIA >= quantidade) {
+            moedasRESISTENCIA -= quantidade;
+        }
+        return false;
     }
 }
