@@ -9,6 +9,13 @@ public class Creature {
     String orientacao;
     String imagem;
     int pontos = 0;
+    boolean moverDiagonal = false;
+    int custo;
+    String tipof;
+
+    public boolean getMoverDiagonal() {
+        return moverDiagonal;
+    }
 
     public int getX() {
         return x;
@@ -28,9 +35,6 @@ public class Creature {
         this.y = y;
     }
 
-    boolean moverDiagonal = false;
-    int custo;
-    String tipof;
 
     public int getEquipa() {
         return equipa;
@@ -42,6 +46,14 @@ public class Creature {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public String getOrientacao() {
+        return orientacao;
+    }
+
+    public int getAlcance() {
+        return alcance;
     }
 
     public Creature(int id, String tipo, int equipa, int x, int y, String orientacao) {

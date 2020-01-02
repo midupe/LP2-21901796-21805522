@@ -176,7 +176,56 @@ public class FandeisiaGameManager {
         2. 2MF, se pelo menos uma criatura do jogador tiver encontrado um Tesouro no turno em questão
 
         */
-
+        for (Creature creature: criaturas) {
+            if (currentTeam == creature.getEquipa()){
+                int id = creature.getId();
+                int x = creature.getX();
+                int y = creature.getY();
+                String orientacao = creature.getOrientacao();
+                Boolean moveDiagonal = creature.getMoverDiagonal();
+                if (!validarEMoverCriatura(id)){
+                    if (!moveDiagonal) {
+                        if (orientacao.equals("Norte")) {
+                            orientacao = "Este";
+                        }
+                        if (orientacao.equals("Este")) {
+                            orientacao = "Sul";
+                        }
+                        if (orientacao.equals("Sul")) {
+                            orientacao = "Oeste";
+                        }
+                        if (orientacao.equals("Oeste")) {
+                            orientacao = "Norte";
+                        }
+                    } else {
+                        if (orientacao.equals("Norte")) {
+                            orientacao = "Nordeste";
+                        }
+                        if (orientacao.equals("Nordeste")) {
+                            orientacao = "Este";
+                        }
+                        if (orientacao.equals("Este")) {
+                            orientacao = "Sudeste";
+                        }
+                        if (orientacao.equals("Sudeste")) {
+                            orientacao = "Sul";
+                        }
+                        if (orientacao.equals("Sul")) {
+                            orientacao = "Sudoeste";
+                        }
+                        if (orientacao.equals("Sudoeste")) {
+                            orientacao = "Oeste";
+                        }
+                        if (orientacao.equals("Oeste")) {
+                            orientacao = "Noroeste";
+                        }
+                        if (orientacao.equals("Noroeste")) {
+                            orientacao = "Norte";
+                        }
+                    }
+                }
+            }
+        }
 
 
 
@@ -425,6 +474,43 @@ public class FandeisiaGameManager {
         }
         if (currentTeam == 20 && moedasRESISTENCIA >= quantidade) {
             moedasRESISTENCIA -= quantidade;
+        }
+        return false;
+    }
+
+    public boolean validarEMoverCriatura(int id){
+        for (Creature creature: criaturas) {
+            if (creature.getId() == id) {
+                int alcance = creature.getAlcance();
+                int x = creature.getX();
+                int y = creature.getY();
+                int irX = x;
+                int irY = y;
+                String orientacao = creature.getOrientacao();
+                if (orientacao.equals("Norte")) {
+                    irX = x;
+                    irY = y-alcance;
+                }
+                if (orientacao.equals("Sul")) {
+                    irX = x;
+                    irY = y+alcance;
+                }
+                if (orientacao.equals("Este")) {
+                    irX = x+alcance;
+                    irY = y;
+                }
+                if (orientacao.equals("Oeste")) {
+                    irX = x-alcance;
+                    irY = y;
+                }
+                if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY && tabuleiro[irX][irY] == 0) {
+                    creature.setX(irX);
+                    creature.setY(irY);
+                    tabuleiro[x][y] = 0;
+                    tabuleiro[irX][irY] = id;
+                    return true;
+                }
+            }
         }
         return false;
     }
