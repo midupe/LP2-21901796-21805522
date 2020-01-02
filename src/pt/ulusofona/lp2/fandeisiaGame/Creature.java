@@ -103,7 +103,7 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        //return imagem; --ESTA COM BUG
+        //return imagem; --ESTA COM BUG implementar
         return null;
     }
 
