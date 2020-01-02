@@ -79,7 +79,7 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
-        this.imagem = getImagePNG();
+        this.imagem = tipof + "_" + orientacao + ".png";
     }
 
     public int getCusto() {
@@ -87,7 +87,6 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        imagem = tipof + "_" + orientacao + ".png";
         return imagem;
     }
 

@@ -10,8 +10,8 @@ public class FandeisiaGameManager {
     static ArrayList<Creature> criaturas = new ArrayList<>();
     static ArrayList<Tesouro> tesouros = new ArrayList<>();
     static ArrayList<Buraco> buracos = new ArrayList<>();
-    static int widthX;
-    static int heightY;
+    int widthX;
+    int heightY;
 
     int[][] tabuleiro;
     int moedasLDR = 50;
@@ -90,8 +90,8 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
-        this.widthX = rows;
-        this.heightY = columns;
+        this.widthX = columns - 1;
+        this.heightY = rows - 1;
         tabuleiro = new int[columns][rows];
         for (String object : content) {
             String[] data = object.split(",");
@@ -264,6 +264,9 @@ public class FandeisiaGameManager {
     }
 
     public boolean enchant(int x, int y, String spellName){
+        if (spellName == null) {
+            return false;
+        }
         for (Creature creature: criaturas){
             if (creature.getX() == x && y == creature.getY()) {
                 int id = creature.getId();
@@ -272,26 +275,36 @@ public class FandeisiaGameManager {
                     tabuleiro[x][y] = 0;
                     return true;
                 }
-                if (spellName.equals("EmpurraParaEste")){
-
+                if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y)){
+                    moverCriatura(id, x+1, y);
+                    tabuleiro[x][y] = 0;
+                    return true;
                 }
-                if (spellName.equals("EmpurraParaSul")){
-
+                if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1)){
+                    moverCriatura(id, x, y+1);
+                    tabuleiro[x][y] = 0;
+                    return true;
                 }
-                if (spellName.equals("EmpurraParaSul")){
 
-                }
-                if (spellName.equals("EmpurraParaOeste")){
-
+                if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y)){
+                    moverCriatura(id, x-1, y);
+                    tabuleiro[x][y] = 0;
+                    return true;
                 }
                 if (spellName.equals("ReduzAlcance")){
-
+                    return true;
+                }
+                if (spellName.equals("DuplicaAlcance")){
+                    return true;
                 }
                 if (spellName.equals("Congela")){
-
+                    return true;
                 }
                 if (spellName.equals("Congela4Ever")){
-
+                    return true;
+                }
+                if (spellName.equals("Descongela")){
+                    return true;
                 }
             }
         }
