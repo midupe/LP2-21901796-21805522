@@ -9,7 +9,25 @@ public class Creature {
     String orientacao;
     String imagem;
     int pontos = 0;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     int alcance;
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     boolean moverDiagonal = false;
     int custo;
     String tipof;
@@ -34,7 +52,6 @@ public class Creature {
         this.equipa = equipa;
         this.orientacao = orientacao;
         tipof = tipo;
-        this.imagem = getImagePNG();
         if (tipo.equals("Anão")){
             tipof = "Anao";
             alcance = 1;
@@ -62,7 +79,7 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
-        getImagePNG();
+        this.imagem = getImagePNG();
     }
 
     public int getCusto() {
@@ -81,4 +98,5 @@ public class Creature {
     public String toString() {
         return id + " | " + tipo + " | " + equipa + " | " + pontos + " @ (" + x + ", " + y + ") " + orientacao;
     }
+
 }

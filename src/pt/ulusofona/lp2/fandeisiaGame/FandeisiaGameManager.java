@@ -157,7 +157,38 @@ public class FandeisiaGameManager {
         currentTeam = teamId;
     }
 
-    public void processTurn(){}
+    public void processTurn(){
+        /*
+        ------------ ACAO ------------
+
+        1. Lançar feitiços: 0 ou +
+        2. Calcular e aplicar os efeitos dos feitiços aplicados pelo utilizador
+
+        ------------ MOVER ------------
+
+        1. Mover ou tentar: por ordem do id
+            a. vericar se movimento valido
+            b. se valido mover, se nao, virar
+
+        ------------ MOEDAS E TESOURO ------------
+
+        1. 1MF,  se nenhuma criatura do jogador tiver encontrado um Tesouro no turno em questão
+        2. 2MF, se pelo menos uma criatura do jogador tiver encontrado um Tesouro no turno em questão
+
+        */
+
+
+
+
+
+
+
+        if (currentTeam == 10){
+            currentTeam = 20;
+        } else {
+            currentTeam = 10;
+        }
+    }
 
     public List<Creature> getCreatures() {
         return criaturas;
@@ -233,8 +264,38 @@ public class FandeisiaGameManager {
     }
 
     public boolean enchant(int x, int y, String spellName){
-        //Implementar
-        return true;
+        for (Creature creature: criaturas){
+            if (creature.getX() == x && y == creature.getY()) {
+                int id = creature.getId();
+                if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1)){
+                    moverCriatura(id, x, y-1);
+                    tabuleiro[x][y] = 0;
+                    return true;
+                }
+                if (spellName.equals("EmpurraParaEste")){
+
+                }
+                if (spellName.equals("EmpurraParaSul")){
+
+                }
+                if (spellName.equals("EmpurraParaSul")){
+
+                }
+                if (spellName.equals("EmpurraParaOeste")){
+
+                }
+                if (spellName.equals("ReduzAlcance")){
+
+                }
+                if (spellName.equals("Congela")){
+
+                }
+                if (spellName.equals("Congela4Ever")){
+
+                }
+            }
+        }
+        return false;
     }
 
     public String getSpell(int x, int y) {
@@ -289,5 +350,26 @@ public class FandeisiaGameManager {
 
     public void toggleAI(boolean active) {
         //Implementar
+    }
+
+    //------------- FUNCOES EXTRA -------------\\
+
+    public boolean temBuraco(int x, int y){
+        for (Buraco buraco: buracos){
+            if (buraco.getX() == x && buraco.getY() == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void moverCriatura (int id, int x, int y){
+        for (Creature creature: criaturas) {
+            if (creature.getId() == id) {
+                creature.setX(x);
+                creature.setY(y);
+                tabuleiro[x][y] = id;
+            }
+        }
     }
 }
