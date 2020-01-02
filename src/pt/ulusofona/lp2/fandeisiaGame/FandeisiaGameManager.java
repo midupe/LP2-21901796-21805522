@@ -7,9 +7,9 @@ import java.util.*;
 
 public class FandeisiaGameManager {
 
-    static ArrayList<Creature> criaturas = new ArrayList<>();
-    static ArrayList<Tesouro> tesouros = new ArrayList<>();
-    static ArrayList<Buraco> buracos = new ArrayList<>();
+    ArrayList<Creature> criaturas = new ArrayList<>();
+    ArrayList<Tesouro> tesouros = new ArrayList<>();
+    ArrayList<Buraco> buracos = new ArrayList<>();
     int widthX;
     int heightY;
 
