@@ -15,8 +15,8 @@ public class FandeisiaGameManager {
     int heightY;
 
     int[][] tabuleiro;
-    int moedasLDR;
-    int moedasRESISTENCIA;
+    int moedasLDR = 50;
+    int moedasRESISTENCIA = 50;
     int turnos;
     int currentTeam;
     int tesouroApanhadoCurrentTurn;
