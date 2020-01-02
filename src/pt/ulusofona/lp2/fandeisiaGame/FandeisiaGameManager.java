@@ -287,10 +287,10 @@ public class FandeisiaGameManager {
         int pontosLDR = 0;
         int pontosRESISTENCIA = 0;
         for (Creature creature : criaturas) {
-            if (creature.getEquipa() == 0) {
+            if (creature.getEquipa() == 10) {
                 pontosLDR += creature.getPontos();
             }
-            if (creature.getEquipa() == 1) {
+            if (creature.getEquipa() == 20) {
                 pontosRESISTENCIA += creature.getPontos();
             }
         }
