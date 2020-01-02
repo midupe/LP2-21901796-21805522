@@ -149,7 +149,7 @@ public class FandeisiaGameManager {
             moedasRESISTENCIA = 50;
             return 2;
         }
-        turnos = 0;
+        turnos = -1;
         criaturas.sort(Comparator.comparing(Creature::getId));
         return 0;
     }
@@ -159,6 +159,7 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn(){
+        turnos++;
         tesouroApanhadoCurrentTurn = 0;
         for (Creature creature: criaturas) {
             if (currentTeam == creature.getEquipa()){
@@ -170,41 +171,41 @@ public class FandeisiaGameManager {
                 if (!validarEMoverCriatura(id)){
                     if (!moveDiagonal) {
                         if (orientacao.equals("Norte")) {
-                            orientacao = "Este";
+                            creature.setOrientacao("Este");
                         }
                         if (orientacao.equals("Este")) {
-                            orientacao = "Sul";
+                            creature.setOrientacao("Sul");
                         }
                         if (orientacao.equals("Sul")) {
-                            orientacao = "Oeste";
+                            creature.setOrientacao("Oeste");
                         }
                         if (orientacao.equals("Oeste")) {
-                            orientacao = "Norte";
+                            creature.setOrientacao("Norte");
                         }
                     } else {
                         if (orientacao.equals("Norte")) {
-                            orientacao = "Nordeste";
+                            creature.setOrientacao("Nordeste");
                         }
                         if (orientacao.equals("Nordeste")) {
-                            orientacao = "Este";
+                            creature.setOrientacao("Este");
                         }
                         if (orientacao.equals("Este")) {
-                            orientacao = "Sudeste";
+                            creature.setOrientacao("Sudeste");
                         }
                         if (orientacao.equals("Sudeste")) {
-                            orientacao = "Sul";
+                            creature.setOrientacao("Sul");
                         }
                         if (orientacao.equals("Sul")) {
-                            orientacao = "Sudoeste";
+                            creature.setOrientacao("Sudoeste");
                         }
                         if (orientacao.equals("Sudoeste")) {
-                            orientacao = "Oeste";
+                            creature.setOrientacao("Oeste");
                         }
                         if (orientacao.equals("Oeste")) {
-                            orientacao = "Noroeste";
+                            creature.setOrientacao("Noroeste");
                         }
                         if (orientacao.equals("Noroeste")) {
-                            orientacao = "Norte";
+                            creature.setOrientacao("Norte");
                         }
                     }
                 }
@@ -232,13 +233,13 @@ public class FandeisiaGameManager {
     }
 
     public boolean gameIsOver() {
-        if (turnos > 14 && getCurrentScore(1) == 0 && getCurrentScore(0) == 0) {
+        if (turnos > 14 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
             return true;
         }
-        if (tesouros.size() == getCurrentScore(0) + getCurrentScore(1)) {
+        if (tesouros.size() == getCurrentScore(10) + getCurrentScore(20)) {
             return true;
         }
-        if (tesouros.size() / 2 < getCurrentScore(0) || tesouros.size() / 2 < getCurrentScore(1)) {
+        if (tesouros.size() / 2 < getCurrentScore(10) || tesouros.size() / 2 < getCurrentScore(20)) {
             return true;
         }
         return false;
@@ -469,6 +470,7 @@ public class FandeisiaGameManager {
     public boolean validarEMoverCriatura(int id){
         for (Creature creature: criaturas) {
             if (creature.getId() == id) {
+                boolean tesouroApanhado = false;
                 int alcance = creature.getAlcance();
                 int x = creature.getX();
                 int y = creature.getY();
@@ -493,20 +495,23 @@ public class FandeisiaGameManager {
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
                     if (tabuleiro[irX][irY] != 0) {
-                        for (Tesouro tesouro: tesouros) {
-                            if (tabuleiro[x][y] == tesouro.getId()){
-                                tesouros.remove(tesouro);
+                        List<Tesouro> toRemove = new ArrayList<Tesouro>();
+                        for (Tesouro tesouro : tesouros) {
+                            if (tabuleiro[irX][irY] == tesouro.getId()) {
                                 tesouroApanhadoCurrentTurn++;
-                            } else {
-                                return false;
+                                tesouroApanhado = true;
+                                toRemove.add(tesouro);
                             }
                         }
+                        tesouros.removeAll(toRemove);
                     }
-                    creature.setX(irX);
-                    creature.setY(irY);
-                    tabuleiro[x][y] = 0;
-                    tabuleiro[irX][irY] = id;
-                    return true;
+                    if (tabuleiro[irX][irY] == 0 || tesouroApanhado) {
+                        creature.setX(irX);
+                        creature.setY(irY);
+                        tabuleiro[x][y] = 0;
+                        tabuleiro[irX][irY] = id;
+                        return true;
+                    }
                 }
             }
         }

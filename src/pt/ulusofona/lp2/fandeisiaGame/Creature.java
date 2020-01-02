@@ -56,6 +56,10 @@ public class Creature {
         return alcance;
     }
 
+    public void setOrientacao(String orientacao) {
+        this.orientacao = orientacao;
+    }
+
     public Creature(int id, String tipo, int equipa, int x, int y, String orientacao) {
         this.id = id;
         this.tipo = tipo;
