@@ -499,6 +499,7 @@ public class FandeisiaGameManager {
                         for (Tesouro tesouro : tesouros) {
                             if (tabuleiro[irX][irY] == tesouro.getId()) {
                                 tesouroApanhadoCurrentTurn++;
+                                creature.adicionarPonto();
                                 tesouroApanhado = true;
                                 toRemove.add(tesouro);
                             }

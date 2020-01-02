@@ -115,4 +115,7 @@ public class Creature {
         return id + " | " + tipo + " | " + equipa + " | " + pontos + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
+    public void adicionarPonto() {
+        pontos++;
+    }
 }
