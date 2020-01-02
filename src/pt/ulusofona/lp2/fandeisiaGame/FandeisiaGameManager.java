@@ -153,54 +153,52 @@ public class FandeisiaGameManager {
         turnos++;
         tesouroApanhadoCurrentTurn = 0;
         for (Creature creature: criaturas) {
-            if (currentTeam == creature.getEquipa()){
-                int id = creature.getId();
-                int x = creature.getX();
-                int y = creature.getY();
-                String orientacao = creature.getOrientacao();
-                Boolean moveDiagonal = creature.getMoverDiagonal();
-                if (!validarEMoverCriatura(id)){
-                    if (!moveDiagonal) {
-                        if (orientacao.equals("Norte")) {
-                            creature.setOrientacao("Este");
-                        }
-                        if (orientacao.equals("Este")) {
-                            creature.setOrientacao("Sul");
-                        }
-                        if (orientacao.equals("Sul")) {
-                            creature.setOrientacao("Oeste");
-                        }
-                        if (orientacao.equals("Oeste")) {
-                            creature.setOrientacao("Norte");
-                        }
-                    } else {
-                        if (orientacao.equals("Norte")) {
-                            creature.setOrientacao("Nordeste");
-                        }
-                        if (orientacao.equals("Nordeste")) {
-                            creature.setOrientacao("Este");
-                        }
-                        if (orientacao.equals("Este")) {
-                            creature.setOrientacao("Sudeste");
-                        }
-                        if (orientacao.equals("Sudeste")) {
-                            creature.setOrientacao("Sul");
-                        }
-                        if (orientacao.equals("Sul")) {
-                            creature.setOrientacao("Sudoeste");
-                        }
-                        if (orientacao.equals("Sudoeste")) {
-                            creature.setOrientacao("Oeste");
-                        }
-                        if (orientacao.equals("Oeste")) {
-                            creature.setOrientacao("Noroeste");
-                        }
-                        if (orientacao.equals("Noroeste")) {
-                            creature.setOrientacao("Norte");
-                        }
+            int id = creature.getId();
+            int x = creature.getX();
+            int y = creature.getY();
+            String orientacao = creature.getOrientacao();
+            Boolean moveDiagonal = creature.getMoverDiagonal();
+            if (!validarEMoverCriatura(id)){
+                if (!moveDiagonal) {
+                    if (orientacao.equals("Norte")) {
+                        creature.setOrientacao("Este");
                     }
-                    creature.getImagePNG();
+                    if (orientacao.equals("Este")) {
+                        creature.setOrientacao("Sul");
+                    }
+                    if (orientacao.equals("Sul")) {
+                        creature.setOrientacao("Oeste");
+                    }
+                    if (orientacao.equals("Oeste")) {
+                        creature.setOrientacao("Norte");
+                    }
+                } else {
+                    if (orientacao.equals("Norte")) {
+                        creature.setOrientacao("Nordeste");
+                    }
+                    if (orientacao.equals("Nordeste")) {
+                        creature.setOrientacao("Este");
+                    }
+                    if (orientacao.equals("Este")) {
+                        creature.setOrientacao("Sudeste");
+                    }
+                    if (orientacao.equals("Sudeste")) {
+                        creature.setOrientacao("Sul");
+                    }
+                    if (orientacao.equals("Sul")) {
+                        creature.setOrientacao("Sudoeste");
+                    }
+                    if (orientacao.equals("Sudoeste")) {
+                        creature.setOrientacao("Oeste");
+                    }
+                    if (orientacao.equals("Oeste")) {
+                        creature.setOrientacao("Noroeste");
+                    }
+                    if (orientacao.equals("Noroeste")) {
+                        creature.setOrientacao("Norte");
+                    }
                 }
+                creature.getImagePNG();
             }
         }
         if (currentTeam == 10){
