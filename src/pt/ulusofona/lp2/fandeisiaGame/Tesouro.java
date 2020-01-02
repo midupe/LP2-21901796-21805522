@@ -4,7 +4,6 @@ public class Tesouro {
     int pontos;
     int id;
     int x, y;
-    boolean apanhado = false;
 
     public Tesouro(int id, int x, int y, String type) {
         this.id = id;
@@ -31,9 +30,5 @@ public class Tesouro {
 
     public int getY() {
         return y;
-    }
-
-    public void apanhar(){
-        apanhado = true;
     }
 }

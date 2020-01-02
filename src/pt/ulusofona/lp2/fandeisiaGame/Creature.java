@@ -99,7 +99,8 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        return imagem;
+        //return imagem; --ESTA COM BUG
+        return null;
     }
 
     public int getId() {

@@ -18,6 +18,7 @@ public class FandeisiaGameManager {
     int moedasRESISTENCIA = 50;
     int turnos;
     int currentTeam;
+    int tesouroApanhadoCurrentTurn = 0;
 
     public FandeisiaGameManager() {}
 
@@ -158,24 +159,7 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn(){
-        /*
-        ------------ ACAO ------------
-
-        1. Lançar feitiços: 0 ou +
-        2. Calcular e aplicar os efeitos dos feitiços aplicados pelo utilizador
-
-        ------------ MOVER ------------
-
-        1. Mover ou tentar: por ordem do id
-            a. vericar se movimento valido
-            b. se valido mover, se nao, virar
-
-        ------------ MOEDAS E TESOURO ------------
-
-        1. 1MF,  se nenhuma criatura do jogador tiver encontrado um Tesouro no turno em questão
-        2. 2MF, se pelo menos uma criatura do jogador tiver encontrado um Tesouro no turno em questão
-
-        */
+        tesouroApanhadoCurrentTurn = 0;
         for (Creature creature: criaturas) {
             if (currentTeam == creature.getEquipa()){
                 int id = creature.getId();
@@ -226,15 +210,19 @@ public class FandeisiaGameManager {
                 }
             }
         }
-
-
-
-
-
-
         if (currentTeam == 10){
+            if (tesouroApanhadoCurrentTurn > 0) {
+                moedasLDR += 2;
+            } else {
+                moedasLDR++;
+            }
             currentTeam = 20;
         } else {
+            if (tesouroApanhadoCurrentTurn > 0) {
+                moedasRESISTENCIA += 2;
+            } else {
+                moedasRESISTENCIA++;
+            }
             currentTeam = 10;
         }
     }
@@ -503,7 +491,17 @@ public class FandeisiaGameManager {
                     irX = x-alcance;
                     irY = y;
                 }
-                if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY && tabuleiro[irX][irY] == 0) {
+                if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
+                    if (tabuleiro[irX][irY] != 0) {
+                        for (Tesouro tesouro: tesouros) {
+                            if (tabuleiro[x][y] == tesouro.getId()){
+                                tesouros.remove(tesouro);
+                                tesouroApanhadoCurrentTurn++;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
                     creature.setX(irX);
                     creature.setY(irY);
                     tabuleiro[x][y] = 0;
