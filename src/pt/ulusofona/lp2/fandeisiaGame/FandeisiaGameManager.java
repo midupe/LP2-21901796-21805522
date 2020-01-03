@@ -254,15 +254,19 @@ public class FandeisiaGameManager {
         }
         if (getCurrentScore(10) > getCurrentScore(20)) {
             resultados.add("Resultado: Vitória da equipa LDR");
-
+            resultados.add("LDR: " + getCurrentScore(10));
+            resultados.add("RESISTENCIA: " + getCurrentScore(20));
         }
         if (getCurrentScore(10) < getCurrentScore(20)) {
             resultados.add("Resultado: Vitória da equipa RESISTENCIA");
+            resultados.add("RESISTENCIA: " + getCurrentScore(20));
+            resultados.add("LDR: " + getCurrentScore(10));
         }
         resultados.add("Nr. de Turnos jogados: " + turnos);
         resultados.add("-----");
         for (Creature creature : criaturas) {
-            resultados.add(creature.getId() + " : " + creature.getTipo() + " : " + creature.getPontos());
+            resultados.add(creature.getId() + " : " + creature.getTipo() + " : " + creature.getOuros()+ " : " +
+                    creature.getPratas() + " : " + creature.getBronzes() + " : " + creature.getPontos());
         }
         return resultados;
     }

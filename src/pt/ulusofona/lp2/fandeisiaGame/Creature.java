@@ -11,6 +11,9 @@ public class Creature {
     int pontos = 0;
     boolean moverDiagonal = false;
     int custo;
+    int ouros = 0;
+    int pratas = 0;
+    int bronzes = 0;
     String tipof;
 
     public boolean getMoverDiagonal() {
@@ -112,11 +115,32 @@ public class Creature {
         return id;
     }
 
+    public int getOuros() {
+        return ouros;
+    }
+
+    public int getPratas() {
+        return pratas;
+    }
+
+    public int getBronzes() {
+        return bronzes;
+    }
+
     public String toString() {
         return id + " | " + tipo + " | " + equipa + " | " + pontos + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     public void adicionarPonto(int pontosAdd) {
+        if (pontosAdd == 3) {
+            ouros++;
+        }
+        if (pontosAdd == 2) {
+            pratas++;
+        }
+        if (pontosAdd == 1) {
+            bronzes++;
+        }
         pontos += pontosAdd;
     }
 }
