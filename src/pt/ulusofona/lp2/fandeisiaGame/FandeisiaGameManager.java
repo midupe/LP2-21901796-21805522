@@ -221,13 +221,17 @@ public class FandeisiaGameManager {
     }
 
     public boolean gameIsOver() {
-        if (turnos > 14 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
+        if (tesouros.size() == 0) {
             return true;
         }
-        if (tesouros.size() == getCurrentScore(10) + getCurrentScore(20)) {
+        if (turnos >= 14 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
             return true;
         }
-        if (tesouros.size() / 2 < getCurrentScore(10) || tesouros.size() / 2 < getCurrentScore(20)) {
+        int pontosEmJogo = 0;
+        for (Tesouro tesouro: tesouros){
+            pontosEmJogo += tesouro.getPontos();
+        }
+        if (pontosEmJogo/2 < getCurrentScore(20) || pontosEmJogo/2 < getCurrentScore(10)) {
             return true;
         }
         return false;
