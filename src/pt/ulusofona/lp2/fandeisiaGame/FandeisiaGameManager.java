@@ -140,6 +140,7 @@ public class FandeisiaGameManager {
             return 2;
         }
         turnos = 0;
+        tesouroApanhadoCurrentTurn = 0;
         criaturas.sort(Comparator.comparing(Creature::getId));
         return 0;
     }
@@ -151,7 +152,6 @@ public class FandeisiaGameManager {
     public void processTurn(){
         if (!gameIsOver()) {
             turnos++;
-            tesouroApanhadoCurrentTurn = 0;
             for (Creature creature : criaturas) {
                 int id = creature.getId();
                 String orientacao = creature.getOrientacao();
@@ -216,6 +216,7 @@ public class FandeisiaGameManager {
                 }
                 currentTeam = 10;
             }
+            tesouroApanhadoCurrentTurn = 0;
             limparFeiticos();
         }
     }
@@ -520,6 +521,7 @@ public class FandeisiaGameManager {
         }
         if (currentTeam == 20 && moedasRESISTENCIA >= quantidade) {
             moedasRESISTENCIA -= quantidade;
+            return true;
         }
         return false;
     }
