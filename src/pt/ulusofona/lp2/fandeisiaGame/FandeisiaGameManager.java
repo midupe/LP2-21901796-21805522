@@ -233,10 +233,12 @@ public class FandeisiaGameManager {
             return true;
         }
         int pontosEmJogo = 0;
+        int pontosLDR = getCurrentScore(10);
+        int pontosRES = getCurrentScore(20);
         for (Tesouro tesouro: tesouros){
             pontosEmJogo += tesouro.getPontos();
         }
-        if (pontosEmJogo/2 < getCurrentScore(20) || pontosEmJogo/2 < getCurrentScore(10)) {
+        if (pontosLDR > pontosRES + pontosEmJogo || pontosRES > pontosLDR + pontosEmJogo) {
             return true;
         }
         return false;
