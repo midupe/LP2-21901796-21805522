@@ -221,7 +221,7 @@ public class FandeisiaGameManager {
     }
 
     public boolean gameIsOver() {
-        if (tesouros.size() == 0) {
+        if (tesouros.isEmpty()) {
             return true;
         }
         if (turnos >= 14 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
