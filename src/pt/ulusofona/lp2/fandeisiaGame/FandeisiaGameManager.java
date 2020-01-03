@@ -446,7 +446,7 @@ public class FandeisiaGameManager {
                 List<Tesouro> toRemove = new ArrayList<Tesouro>();
                 for (Tesouro tesouro : tesouros) {
                     if (tabuleiro[y][x] == tesouro.getId()) {
-                        tesouroApanhadoCurrentTurn += tesouro.getPontos();
+                        tesouroApanhadoCurrentTurn++;
                         creature.adicionarPonto(tesouro.getPontos());
                         toRemove.add(tesouro);
                     }
@@ -522,7 +522,7 @@ public class FandeisiaGameManager {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
                         for (Tesouro tesouro : tesouros) {
                             if (tabuleiro[irY][irX] == tesouro.getId()) {
-                                tesouroApanhadoCurrentTurn += tesouro.getPontos();
+                                tesouroApanhadoCurrentTurn++;
                                 creature.adicionarPonto(tesouro.getPontos());
                                 tesouroApanhado = true;
                                 toRemove.add(tesouro);
