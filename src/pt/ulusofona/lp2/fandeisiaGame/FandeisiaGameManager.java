@@ -542,7 +542,7 @@ public class FandeisiaGameManager {
     public boolean temGigante(int x , int y, int irX, int irY) {
         int i = 0;
         if (x < irX) {
-            for (i = x; i < irX; i++){
+            for (i = x + 1; i < irX; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == i && creature.getY() == y) {
                         return true;
@@ -551,7 +551,7 @@ public class FandeisiaGameManager {
             }
         }
         if (irX < x) {
-            for (i = irX; i < x; i++){
+            for (i = irX + 1; i < x; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == i && creature.getY() == y) {
                         return true;
@@ -560,7 +560,7 @@ public class FandeisiaGameManager {
             }
         }
         if (y < irY) {
-            for (i = y; i < irY; i++){
+            for (i = y + 1; i < irY; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == x && creature.getY() == i) {
                         return true;
@@ -569,7 +569,7 @@ public class FandeisiaGameManager {
             }
         }
         if (irY < y) {
-            for (i = irY; i < y; i++){
+            for (i = irY + 1; i < y; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == x && creature.getY() == i) {
                         return true;
@@ -582,7 +582,7 @@ public class FandeisiaGameManager {
     public boolean temPersonagem(int x, int y, int irX, int irY) {
         int i = 0;
         if (x < irX) {
-            for (i = x; i < irX; i++){
+            for (i = x + 1; i < irX; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getX() == i && creature.getY() == y) {
                         return true;
@@ -591,7 +591,7 @@ public class FandeisiaGameManager {
             }
         }
         if (irX < x) {
-            for (i = irX; i < x; i++){
+            for (i = irX + 1; i < x; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getX() == i && creature.getY() == y) {
                         return true;
@@ -600,7 +600,7 @@ public class FandeisiaGameManager {
             }
         }
         if (y < irY) {
-            for (i = y; i < irY; i++){
+            for (i = y + 1; i < irY; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getX() == x && creature.getY() == i) {
                         return true;
@@ -609,7 +609,7 @@ public class FandeisiaGameManager {
             }
         }
         if (irY < y) {
-            for (i = irY; i < y; i++){
+            for (i = irY + 1; i < y; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getX() == x && creature.getY() == i) {
                         return true;
