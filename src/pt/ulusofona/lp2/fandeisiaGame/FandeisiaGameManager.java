@@ -576,13 +576,48 @@ public class FandeisiaGameManager {
                     irX = x-alcance;
                     irY = y+alcance;
                 }
-                if (tipo.equals("Elfo") && temPersonagemMovElfo(x, y, irX, irY, orientacao)){
-                    return false;
+                if (tipo.equals("Elfo")) {
+                    int xElfo = x;
+                    int yElfo = y;
+                    if (orientacao.equals("Norte")){
+                        yElfo--;
+                    }
+                    if (orientacao.equals("Sul")) {
+                        yElfo++;
+                    }
+                    if (orientacao.equals("Este")) {
+                        xElfo++;
+                    }
+                    if (orientacao.equals("Oeste")) {
+                        xElfo--;
+                    }
+                    if (orientacao.equals("Nordeste")) {
+                        xElfo++;
+                        yElfo--;
+                    }
+                    if (orientacao.equals("Noroeste")) {
+                        xElfo--;
+                        yElfo--;
+                    }
+                    if (orientacao.equals("Sudeste")) {
+                        xElfo++;
+                        yElfo++;
+                    }
+                    if (orientacao.equals("Sudoeste")) {
+                        xElfo--;
+                        yElfo++;
+                    }
+                    if (xElfo >= 0 && xElfo <= widthX && yElfo >= 0 && yElfo <= heightY) {
+                        if (tabuleiro[yElfo][xElfo] > 0) {
+                            return false;
+                        }
+                    }
                 }
                 if (tipo.equals("Gigante") && temGigante(x , y, irX, irY)) {
                     return false;
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
+
                     if (tabuleiro[irY][irX] != 0) {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
                         for (Tesouro tesouro : tesouros) {
@@ -650,6 +685,9 @@ public class FandeisiaGameManager {
         }
         return false;
     }
+
+    /*
+
     public boolean temPersonagemMovElfo(int x, int y, int irX, int irY, String orientacao) {
         int i = 0;
         if (orientacao.equals("Norte") || orientacao.equals("Este") || orientacao.equals("Sul") || orientacao.equals("Oeste")) {
@@ -720,6 +758,7 @@ public class FandeisiaGameManager {
         }
         return false;
     }
+     */
 
     public void limparFeiticos() {
         for (Creature creature: criaturas){
