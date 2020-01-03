@@ -151,7 +151,6 @@ public class FandeisiaGameManager {
 
     public void processTurn(){
         if (!gameIsOver()) {
-            turnos++;
             for (Creature creature : criaturas) {
                 int id = creature.getId();
                 String orientacao = creature.getOrientacao();
@@ -218,6 +217,7 @@ public class FandeisiaGameManager {
             }
             tesouroApanhadoCurrentTurn = 0;
             limparFeiticos();
+            turnos++;
         }
     }
 
