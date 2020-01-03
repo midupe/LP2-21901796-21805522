@@ -19,6 +19,7 @@ public class FandeisiaGameManager {
     int turnos;
     int currentTeam;
     int tesouroApanhadoCurrentTurn;
+    int turnoUltimoTesouroApanhado;
 
     public FandeisiaGameManager() {}
 
@@ -202,6 +203,7 @@ public class FandeisiaGameManager {
             }
             if (currentTeam == 10) {
                 if (tesouroApanhadoCurrentTurn > 0) {
+                    turnoUltimoTesouroApanhado = turnos;
                     moedasLDR += 2;
                 } else {
                     moedasLDR++;
@@ -209,6 +211,7 @@ public class FandeisiaGameManager {
                 currentTeam = 20;
             } else {
                 if (tesouroApanhadoCurrentTurn > 0) {
+                    turnoUltimoTesouroApanhado = turnos;
                     moedasRESISTENCIA += 2;
                 } else {
                     moedasRESISTENCIA++;
@@ -229,7 +232,7 @@ public class FandeisiaGameManager {
         if (tesouros.isEmpty()) {
             return true;
         }
-        if (turnos == 15 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
+        if (turnos - turnoUltimoTesouroApanhado == 15) {
             return true;
         }
         int pontosEmJogo = 0;
