@@ -107,8 +107,9 @@ public class Creature {
     public void updateImage() {
         if (equipa == 10) {
             this.imagem = (tipof + "_" + orientacao + ".png");
-        } else
+        } else {
             this.imagem = ("p" + tipof + "_" + orientacao + ".png");
+        }
     }
 
     public int getCusto() {
