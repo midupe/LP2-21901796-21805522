@@ -140,7 +140,7 @@ public class FandeisiaGameManager {
         if (moedasLDR < 0) {
             return 2;
         }
-        turnos = -1;
+        turnos = 0;
         criaturas.sort(Comparator.comparing(Creature::getId));
         return 0;
     }
@@ -224,7 +224,7 @@ public class FandeisiaGameManager {
         if (tesouros.isEmpty()) {
             return true;
         }
-        if (turnos >= 14 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
+        if (turnos == 15 && getCurrentScore(20) == 0 && getCurrentScore(10) == 0) {
             return true;
         }
         int pontosEmJogo = 0;
