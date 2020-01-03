@@ -206,7 +206,8 @@ public class FandeisiaGameManager {
                 moedasLDR++;
             }
             currentTeam = 20;
-        } else {
+        }
+        if (currentTeam == 20){
             if (tesouroApanhadoCurrentTurn > 0) {
                 moedasRESISTENCIA += 2;
             } else {
@@ -450,7 +451,9 @@ public class FandeisiaGameManager {
                 List<Tesouro> toRemove = new ArrayList<Tesouro>();
                 for (Tesouro tesouro : tesouros) {
                     if (tabuleiro[y][x] == tesouro.getId()) {
-                        tesouroApanhadoCurrentTurn++;
+                        if (creature.getEquipa() == currentTeam) {
+                            tesouroApanhadoCurrentTurn++;
+                        }
                         creature.adicionarPonto(tesouro.getPontos());
                         toRemove.add(tesouro);
                     }
@@ -526,7 +529,9 @@ public class FandeisiaGameManager {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
                         for (Tesouro tesouro : tesouros) {
                             if (tabuleiro[irY][irX] == tesouro.getId()) {
-                                tesouroApanhadoCurrentTurn++;
+                                if (creature.getEquipa() == currentTeam) {
+                                    tesouroApanhadoCurrentTurn++;
+                                }
                                 creature.adicionarPonto(tesouro.getPontos());
                                 tesouroApanhado = true;
                                 toRemove.add(tesouro);
