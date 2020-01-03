@@ -232,7 +232,7 @@ public class FandeisiaGameManager {
         if (tesouros.isEmpty()) {
             return true;
         }
-        if (turnos - turnoUltimoTesouroApanhado == 15) {
+        if (turnos - turnoUltimoTesouroApanhado == 14) {
             return true;
         }
         int pontosEmJogo = 0;
