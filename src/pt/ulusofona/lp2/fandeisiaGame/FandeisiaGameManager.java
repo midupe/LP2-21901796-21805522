@@ -351,8 +351,7 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("DuplicaAlcance")){
                     if (gastarMoedas(3)) {
-                        creature.aplicarEfeito("DuplicaAlcance");
-                        int alcance = creature.getAlcance();
+                        int alcance = creature.getAlcance()*2;
                         int irX = x;
                         int irY = y;
                         String orientacao = creature.getOrientacao();
@@ -389,11 +388,10 @@ public class FandeisiaGameManager {
                             irY = y+alcance;
                         }
                         if(temBuraco(irX, irY)){
-                            creature.aplicarEfeito("ReduzAlcance");
                             gastarMoedas(-3);
-                            creature.aplicarEfeito("");
                             return false;
                         }
+                        creature.aplicarEfeito("DuplicaAlcance");
                         return true;
                     }
                 }
