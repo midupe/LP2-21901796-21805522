@@ -723,10 +723,8 @@ public class FandeisiaGameManager {
 
     public void limparFeiticos() {
         for (Creature creature: criaturas){
-            if (creature.getFeiticoAplicado()!= null) {
-                if (!creature.getFeiticoAplicado().equals("Congela4Ever")){
-                    creature.aplicarEfeito("");
-                }
+            if (!creature.getFeiticoAplicado().equals("Congela4Ever")){
+                creature.aplicarEfeito("");
             }
         }
     }
