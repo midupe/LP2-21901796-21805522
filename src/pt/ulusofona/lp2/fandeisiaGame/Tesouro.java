@@ -31,4 +31,8 @@ public class Tesouro {
     public int getY() {
         return y;
     }
+
+    public int getPontos() {
+        return pontos;
+    }
 }
