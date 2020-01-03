@@ -149,74 +149,76 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn(){
-        turnos++;
-        tesouroApanhadoCurrentTurn = 0;
-        for (Creature creature: criaturas) {
-            int id = creature.getId();
-            String orientacao = creature.getOrientacao();
-            Boolean moveDiagonal = creature.getMoverDiagonal();
-            if (!validarEMoverCriatura(id)){
-                if (!creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
-                    if (!moveDiagonal) {
-                        if (orientacao.equals("Norte")) {
-                            creature.setOrientacao("Este");
-                        }
-                        if (orientacao.equals("Este")) {
-                            creature.setOrientacao("Sul");
-                        }
-                        if (orientacao.equals("Sul")) {
-                            creature.setOrientacao("Oeste");
-                        }
-                        if (orientacao.equals("Oeste")) {
-                            creature.setOrientacao("Norte");
-                        }
-                    } else {
-                        if (orientacao.equals("Norte")) {
-                            creature.setOrientacao("Nordeste");
-                        }
-                        if (orientacao.equals("Nordeste")) {
-                            creature.setOrientacao("Este");
-                        }
-                        if (orientacao.equals("Este")) {
-                            creature.setOrientacao("Sudeste");
-                        }
-                        if (orientacao.equals("Sudeste")) {
-                            creature.setOrientacao("Sul");
-                        }
-                        if (orientacao.equals("Sul")) {
-                            creature.setOrientacao("Sudoeste");
-                        }
-                        if (orientacao.equals("Sudoeste")) {
-                            creature.setOrientacao("Oeste");
-                        }
-                        if (orientacao.equals("Oeste")) {
-                            creature.setOrientacao("Noroeste");
-                        }
-                        if (orientacao.equals("Noroeste")) {
-                            creature.setOrientacao("Norte");
+        if (!gameIsOver()) {
+            turnos++;
+            tesouroApanhadoCurrentTurn = 0;
+            for (Creature creature : criaturas) {
+                int id = creature.getId();
+                String orientacao = creature.getOrientacao();
+                Boolean moveDiagonal = creature.getMoverDiagonal();
+                if (!validarEMoverCriatura(id)) {
+                    if (!creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
+                        if (!moveDiagonal) {
+                            if (orientacao.equals("Norte")) {
+                                creature.setOrientacao("Este");
+                            }
+                            if (orientacao.equals("Este")) {
+                                creature.setOrientacao("Sul");
+                            }
+                            if (orientacao.equals("Sul")) {
+                                creature.setOrientacao("Oeste");
+                            }
+                            if (orientacao.equals("Oeste")) {
+                                creature.setOrientacao("Norte");
+                            }
+                        } else {
+                            if (orientacao.equals("Norte")) {
+                                creature.setOrientacao("Nordeste");
+                            }
+                            if (orientacao.equals("Nordeste")) {
+                                creature.setOrientacao("Este");
+                            }
+                            if (orientacao.equals("Este")) {
+                                creature.setOrientacao("Sudeste");
+                            }
+                            if (orientacao.equals("Sudeste")) {
+                                creature.setOrientacao("Sul");
+                            }
+                            if (orientacao.equals("Sul")) {
+                                creature.setOrientacao("Sudoeste");
+                            }
+                            if (orientacao.equals("Sudoeste")) {
+                                creature.setOrientacao("Oeste");
+                            }
+                            if (orientacao.equals("Oeste")) {
+                                creature.setOrientacao("Noroeste");
+                            }
+                            if (orientacao.equals("Noroeste")) {
+                                creature.setOrientacao("Norte");
+                            }
                         }
                     }
+                    creature.getImagePNG();
                 }
-                creature.getImagePNG();
             }
-        }
-        if (currentTeam == 10){
-            if (tesouroApanhadoCurrentTurn > 0) {
-                moedasLDR += 2;
-            } else {
-                moedasLDR++;
+            if (currentTeam == 10) {
+                if (tesouroApanhadoCurrentTurn > 0) {
+                    moedasLDR += 2;
+                } else {
+                    moedasLDR++;
+                }
+                currentTeam = 20;
             }
-            currentTeam = 20;
-        }
-        if (currentTeam == 20){
-            if (tesouroApanhadoCurrentTurn > 0) {
-                moedasRESISTENCIA += 2;
-            } else {
-                moedasRESISTENCIA++;
+            if (currentTeam == 20) {
+                if (tesouroApanhadoCurrentTurn > 0) {
+                    moedasRESISTENCIA += 2;
+                } else {
+                    moedasRESISTENCIA++;
+                }
+                currentTeam = 10;
             }
-            currentTeam = 10;
+            limparFeiticos();
         }
-        limparFeiticos();
     }
 
     public List<Creature> getCreatures() {
@@ -384,7 +386,7 @@ public class FandeisiaGameManager {
                         if(temBuraco(irX, irY)){
                             creature.aplicarEfeito("ReduzAlcance");
                             gastarMoedas(-3);
-                            creature.aplicarEfeito(null);
+                            creature.aplicarEfeito("");
                             return false;
                         }
                         return true;
