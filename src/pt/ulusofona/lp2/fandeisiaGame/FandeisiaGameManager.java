@@ -156,43 +156,45 @@ public class FandeisiaGameManager {
             String orientacao = creature.getOrientacao();
             Boolean moveDiagonal = creature.getMoverDiagonal();
             if (!validarEMoverCriatura(id)){
-                if (!moveDiagonal) {
-                    if (orientacao.equals("Norte")) {
-                        creature.setOrientacao("Este");
-                    }
-                    if (orientacao.equals("Este")) {
-                        creature.setOrientacao("Sul");
-                    }
-                    if (orientacao.equals("Sul")) {
-                        creature.setOrientacao("Oeste");
-                    }
-                    if (orientacao.equals("Oeste")) {
-                        creature.setOrientacao("Norte");
-                    }
-                } else {
-                    if (orientacao.equals("Norte")) {
-                        creature.setOrientacao("Nordeste");
-                    }
-                    if (orientacao.equals("Nordeste")) {
-                        creature.setOrientacao("Este");
-                    }
-                    if (orientacao.equals("Este")) {
-                        creature.setOrientacao("Sudeste");
-                    }
-                    if (orientacao.equals("Sudeste")) {
-                        creature.setOrientacao("Sul");
-                    }
-                    if (orientacao.equals("Sul")) {
-                        creature.setOrientacao("Sudoeste");
-                    }
-                    if (orientacao.equals("Sudoeste")) {
-                        creature.setOrientacao("Oeste");
-                    }
-                    if (orientacao.equals("Oeste")) {
-                        creature.setOrientacao("Noroeste");
-                    }
-                    if (orientacao.equals("Noroeste")) {
-                        creature.setOrientacao("Norte");
+                if (!creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
+                    if (!moveDiagonal) {
+                        if (orientacao.equals("Norte")) {
+                            creature.setOrientacao("Este");
+                        }
+                        if (orientacao.equals("Este")) {
+                            creature.setOrientacao("Sul");
+                        }
+                        if (orientacao.equals("Sul")) {
+                            creature.setOrientacao("Oeste");
+                        }
+                        if (orientacao.equals("Oeste")) {
+                            creature.setOrientacao("Norte");
+                        }
+                    } else {
+                        if (orientacao.equals("Norte")) {
+                            creature.setOrientacao("Nordeste");
+                        }
+                        if (orientacao.equals("Nordeste")) {
+                            creature.setOrientacao("Este");
+                        }
+                        if (orientacao.equals("Este")) {
+                            creature.setOrientacao("Sudeste");
+                        }
+                        if (orientacao.equals("Sudeste")) {
+                            creature.setOrientacao("Sul");
+                        }
+                        if (orientacao.equals("Sul")) {
+                            creature.setOrientacao("Sudoeste");
+                        }
+                        if (orientacao.equals("Sudoeste")) {
+                            creature.setOrientacao("Oeste");
+                        }
+                        if (orientacao.equals("Oeste")) {
+                            creature.setOrientacao("Noroeste");
+                        }
+                        if (orientacao.equals("Noroeste")) {
+                            creature.setOrientacao("Norte");
+                        }
                     }
                 }
                 creature.getImagePNG();
@@ -214,6 +216,7 @@ public class FandeisiaGameManager {
             }
             currentTeam = 10;
         }
+        limparFeiticos();
     }
 
     public List<Creature> getCreatures() {
@@ -381,6 +384,7 @@ public class FandeisiaGameManager {
                         if(temBuraco(irX, irY)){
                             creature.aplicarEfeito("ReduzAlcance");
                             gastarMoedas(-3);
+                            creature.aplicarEfeito(null);
                             return false;
                         }
                         return true;
@@ -388,19 +392,19 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("Congela")){
                     if (gastarMoedas(3)) {
-                        //Implementar
+                        creature.aplicarEfeito("Congela");
                         return true;
                     }
                 }
                 if (spellName.equals("Congela4Ever")){
                     if (gastarMoedas(10)) {
-                        //Implementar
+                        creature.aplicarEfeito("Congela4Ever");
                         return true;
                     }
                 }
                 if (spellName.equals("Descongela")){
                     if (gastarMoedas(8)) {
-                        //Implementar
+                        creature.aplicarEfeito("Descongela");
                         return true;
                     }
                 }
@@ -411,7 +415,7 @@ public class FandeisiaGameManager {
 
     public String getSpell(int x, int y) {
         for (Creature creature: criaturas) {
-            if(tabuleiro[y][x] == creature.getId()){
+            if(tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")){
                 return creature.getFeiticoAplicado();
             }
         }
@@ -521,7 +525,7 @@ public class FandeisiaGameManager {
 
     public boolean validarEMoverCriatura(int id){
         for (Creature creature: criaturas) {
-            if (creature.getId() == id) {
+            if (creature.getId() == id && !creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
                 boolean tesouroApanhado = false;
                 int alcance = creature.getAlcance();
                 int x = creature.getX();
@@ -705,5 +709,15 @@ public class FandeisiaGameManager {
             }
         }
         return false;
+    }
+
+    public void limparFeiticos() {
+        for (Creature creature: criaturas){
+            if (creature.getFeiticoAplicado()!= null) {
+                if (!creature.getFeiticoAplicado().equals("Congela4Ever")){
+                    creature.aplicarEfeito("");
+                }
+            }
+        }
     }
 }

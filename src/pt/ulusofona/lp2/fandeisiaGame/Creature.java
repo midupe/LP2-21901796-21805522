@@ -16,8 +16,9 @@ public class Creature {
     int bronzes = 0;
     String tipof;
     int numTesourosEncontrados = 0;
-    String feiticoAplicado;
+    String feiticoAplicado = "";
     int alcanceOriginal;
+    boolean congela4ever = false;
 
     public boolean getMoverDiagonal() {
         return moverDiagonal;
@@ -162,6 +163,10 @@ public class Creature {
         return feiticoAplicado;
     }
 
+    public boolean isCongela4ever() {
+        return congela4ever;
+    }
+
     public void aplicarEfeito(String feitico) {
         feiticoAplicado = feitico;
         if (feitico.equals("ReduzAlcance")) {
@@ -173,6 +178,12 @@ public class Creature {
         }
         if (feitico.equals("DuplicaAlcance")) {
             alcance *=2;
+        }
+        if (feitico.equals("Congela4Ever")) {
+            congela4ever = true;
+        }
+        if (feitico.equals("Descongela")) {
+            congela4ever = false;
         }
     }
 }
