@@ -154,8 +154,6 @@ public class FandeisiaGameManager {
         tesouroApanhadoCurrentTurn = 0;
         for (Creature creature: criaturas) {
             int id = creature.getId();
-            int x = creature.getX();
-            int y = creature.getY();
             String orientacao = creature.getOrientacao();
             Boolean moveDiagonal = creature.getMoverDiagonal();
             if (!validarEMoverCriatura(id)){
@@ -475,6 +473,7 @@ public class FandeisiaGameManager {
                 int y = creature.getY();
                 int irX = x;
                 int irY = y;
+                String tipo = creature.getTipo();
                 String orientacao = creature.getOrientacao();
                 if (orientacao.equals("Norte")) {
                     irX = x;
@@ -491,6 +490,25 @@ public class FandeisiaGameManager {
                 if (orientacao.equals("Oeste")) {
                     irX = x-alcance;
                     irY = y;
+                }
+                if (orientacao.equals("Nordeste")) {
+                    irX = x+alcance;
+                    irY = y-alcance;
+                }
+                if (orientacao.equals("Noroeste")) {
+                    irX = x-alcance;
+                    irY = y-alcance;
+                }
+                if (orientacao.equals("Sudeste")) {
+                    irX = x-alcance;
+                    irY = y+alcance;
+                }
+                if (orientacao.equals("Sudoeste")) {
+                    irX = x-alcance;
+                    irY = y+alcance;
+                }
+                if (tipo.equals("Elfo") && temPersonagem(x, y, irX, irY)){
+                    return false;
                 }
                 if (creature.getTipo().equals("Gigante") && temGigante(x , y, irX, irY)) {
                     return false;
@@ -554,6 +572,46 @@ public class FandeisiaGameManager {
             for (i = irY; i < y; i++){
                 for (Creature creature: criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean temPersonagem(int x, int y, int irX, int irY) {
+        int i = 0;
+        if (x < irX) {
+            for (i = x; i < irX; i++){
+                for (Creature creature: criaturas) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irX < x) {
+            for (i = irX; i < x; i++){
+                for (Creature creature: criaturas) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (y < irY) {
+            for (i = y; i < irY; i++){
+                for (Creature creature: criaturas) {
+                    if (creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irY < y) {
+            for (i = irY; i < y; i++){
+                for (Creature creature: criaturas) {
+                    if (creature.getX() == x && creature.getY() == i) {
                         return true;
                     }
                 }
