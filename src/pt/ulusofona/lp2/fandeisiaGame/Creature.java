@@ -62,6 +62,7 @@ public class Creature {
 
     public void setOrientacao(String orientacao) {
         this.orientacao = orientacao;
+        updateImage();
     }
 
     public Creature(int id, String tipo, int equipa, int x, int y, String orientacao) {
@@ -99,8 +100,15 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
-        this.imagem = (tipof + "_" + orientacao + ".png");
+        updateImage();
         this.getImagePNG();
+    }
+
+    public void updateImage() {
+        if (equipa == 10) {
+            this.imagem = (tipof + "_" + orientacao + ".png");
+        } else
+            this.imagem = ("p" + tipof + "_" + orientacao + ".png");
     }
 
     public int getCusto() {
@@ -108,8 +116,8 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        //return imagem;
-        return null;
+        updateImage();
+        return imagem;
     }
 
     public int getId() {
