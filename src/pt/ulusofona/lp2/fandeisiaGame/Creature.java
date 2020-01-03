@@ -16,6 +16,8 @@ public class Creature {
     int bronzes = 0;
     String tipof;
     int numTesourosEncontrados = 0;
+    String feiticoAplicado;
+    int alcanceOriginal;
 
     public boolean getMoverDiagonal() {
         return moverDiagonal;
@@ -102,6 +104,7 @@ public class Creature {
         }
         updateImage();
         this.getImagePNG();
+        alcanceOriginal = alcance;
     }
 
     public void updateImage() {
@@ -153,5 +156,23 @@ public class Creature {
             bronzes++;
         }
         pontos += pontosAdd;
+    }
+
+    public String getFeiticoAplicado() {
+        return feiticoAplicado;
+    }
+
+    public void aplicarEfeito(String feitico) {
+        feiticoAplicado = feitico;
+        if (feitico.equals("ReduzAlcance")) {
+            if (alcance == alcanceOriginal) {
+                alcance = 1;
+            } else {
+                alcance = alcanceOriginal;
+            }
+        }
+        if (feitico.equals("DuplicaAlcance")) {
+            alcance *=2;
+        }
     }
 }

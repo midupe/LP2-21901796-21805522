@@ -335,13 +335,54 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("ReduzAlcance")){
                     if (gastarMoedas(2)) {
-                        //Implementar
+                        creature.aplicarEfeito("ReduzAlcance");
                         return true;
                     }
                 }
                 if (spellName.equals("DuplicaAlcance")){
                     if (gastarMoedas(3)) {
-                        //Implementar
+                        creature.aplicarEfeito("DuplicaAlcance");
+                        int alcance = creature.getAlcance();
+                        int irX = x;
+                        int irY = y;
+                        String orientacao = creature.getOrientacao();
+                        if (orientacao.equals("Norte")) {
+                            irX = x;
+                            irY = y-alcance;
+                        }
+                        if (orientacao.equals("Sul")) {
+                            irX = x;
+                            irY = y+alcance;
+                        }
+                        if (orientacao.equals("Este")) {
+                            irX = x+alcance;
+                            irY = y;
+                        }
+                        if (orientacao.equals("Oeste")) {
+                            irX = x-alcance;
+                            irY = y;
+                        }
+                        if (orientacao.equals("Nordeste")) {
+                            irX = x+alcance;
+                            irY = y-alcance;
+                        }
+                        if (orientacao.equals("Noroeste")) {
+                            irX = x-alcance;
+                            irY = y-alcance;
+                        }
+                        if (orientacao.equals("Sudeste")) {
+                            irX = x-alcance;
+                            irY = y+alcance;
+                        }
+                        if (orientacao.equals("Sudoeste")) {
+                            irX = x-alcance;
+                            irY = y+alcance;
+                        }
+                        if(temBuraco(irX, irY)){
+                            creature.aplicarEfeito("ReduzAlcance");
+                            gastarMoedas(-3);
+                            return false;
+                        }
                         return true;
                     }
                 }
@@ -369,7 +410,11 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) {
-        //Implementar
+        for (Creature creature: criaturas) {
+            if(tabuleiro[y][x] == creature.getId()){
+                return creature.getFeiticoAplicado();
+            }
+        }
         return null;
     }
 
