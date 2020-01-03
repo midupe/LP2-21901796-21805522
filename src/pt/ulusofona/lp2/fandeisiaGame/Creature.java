@@ -67,7 +67,7 @@ public class Creature {
         this.y = y;
         this.equipa = equipa;
         this.orientacao = orientacao;
-        tipof = tipo;
+        this.tipof = tipo;
         if (tipo.equals("Anão")){
             tipof = "Anao";
             alcance = 1;
