@@ -316,7 +316,7 @@ public class FandeisiaGameManager {
                 int id = creature.getId();
                 if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1) && !temCriatura(x, y-1)){
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurrarParaNorte");
+                        creature.aplicarEfeito("EmpurraParaNorte");
                         moverCriatura(id, x, y - 1);
                         tabuleiro[y][x] = 0;
                         return true;
@@ -324,7 +324,7 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y) && !temCriatura(x+1, y)){
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurrarParaEste");
+                        creature.aplicarEfeito("EmpurraParaEste");
                         moverCriatura(id, x + 1, y);
                         tabuleiro[y][x] = 0;
                         return true;
@@ -332,7 +332,7 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1) && !temCriatura(x, y+1)){
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurrarParaSul");
+                        creature.aplicarEfeito("EmpurraParaSul");
                         moverCriatura(id, x, y + 1);
                         tabuleiro[y][x] = 0;
                         return true;
@@ -341,7 +341,7 @@ public class FandeisiaGameManager {
 
                 if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y) && !temCriatura(x-1, y)){
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurrarParaOeste");
+                        creature.aplicarEfeito("EmpurraParaOeste");
                         moverCriatura(id, x - 1, y);
                         tabuleiro[y][x] = 0;
                         return true;
