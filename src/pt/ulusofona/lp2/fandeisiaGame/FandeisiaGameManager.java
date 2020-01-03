@@ -208,8 +208,7 @@ public class FandeisiaGameManager {
                     moedasLDR++;
                 }
                 currentTeam = 20;
-            }
-            if (currentTeam == 20) {
+            } else {
                 if (tesouroApanhadoCurrentTurn > 0) {
                     moedasRESISTENCIA += 2;
                 } else {
