@@ -434,9 +434,12 @@ public class FandeisiaGameManager {
     public int getCoinTotal(int teamID) {
         if (teamID == 10) {
             return moedasLDR;
-        } else {
+        } else if (teamID == 20){
             return moedasRESISTENCIA;
+        } else{
+            return Integer.parseInt("Erro");
         }
+
     }
 
     public boolean saveGame(File fich) {
