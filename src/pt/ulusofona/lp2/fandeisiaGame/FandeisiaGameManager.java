@@ -507,10 +507,10 @@ public class FandeisiaGameManager {
                     irX = x-alcance;
                     irY = y+alcance;
                 }
-                if (tipo.equals("Elfo") && temPersonagem(x, y, irX, irY)){
+                if (tipo.equals("Elfo") && temPersonagemMovElfo(x, y, irX, irY, orientacao)){
                     return false;
                 }
-                if (creature.getTipo().equals("Gigante") && temGigante(x , y, irX, irY)) {
+                if (tipo.equals("Gigante") && temGigante(x , y, irX, irY)) {
                     return false;
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
@@ -579,41 +579,71 @@ public class FandeisiaGameManager {
         }
         return false;
     }
-    public boolean temPersonagem(int x, int y, int irX, int irY) {
+    public boolean temPersonagemMovElfo(int x, int y, int irX, int irY, String orientacao) {
         int i = 0;
-        if (x < irX) {
-            for (i = x + 1; i < irX; i++){
-                for (Creature creature: criaturas) {
-                    if (creature.getX() == i && creature.getY() == y) {
-                        return true;
+        if (orientacao.equals("Norte") || orientacao.equals("Este") || orientacao.equals("Sul") || orientacao.equals("Oeste")) {
+            if (x < irX) {
+                for (i = x + 1; i < irX; i++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == y) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (irX < x) {
+                for (i = irX + 1; i < x; i++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == y) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (y < irY) {
+                for (i = y + 1; i < irY; i++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == x && creature.getY() == i) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (irY < y) {
+                for (i = irY + 1; i < y; i++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == x && creature.getY() == i) {
+                            return true;
+                        }
                     }
                 }
             }
         }
-        if (irX < x) {
-            for (i = irX + 1; i < x; i++){
-                for (Creature creature: criaturas) {
-                    if (creature.getX() == i && creature.getY() == y) {
-                        return true;
-                    }
+        if (orientacao.equals("Nordeste")) {
+            for (Creature creature : criaturas) {
+                if (creature.getX() == x+1 && creature.getY() == y-1) {
+                    return true;
                 }
             }
         }
-        if (y < irY) {
-            for (i = y + 1; i < irY; i++){
-                for (Creature creature: criaturas) {
-                    if (creature.getX() == x && creature.getY() == i) {
-                        return true;
-                    }
+        if (orientacao.equals("Sudeste")) {
+            for (Creature creature : criaturas) {
+                if (creature.getX() == x+1 && creature.getY() == y+1) {
+                    return true;
                 }
             }
         }
-        if (irY < y) {
-            for (i = irY + 1; i < y; i++){
-                for (Creature creature: criaturas) {
-                    if (creature.getX() == x && creature.getY() == i) {
-                        return true;
-                    }
+        if (orientacao.equals("Sudoeste")) {
+            for (Creature creature : criaturas) {
+                if (creature.getX() == x-1 && creature.getY() == y+1) {
+                    return true;
+                }
+            }
+        }
+        if (orientacao.equals("Noroeste")) {
+            for (Creature creature : criaturas) {
+                if (creature.getX() == x-1 && creature.getY() == y-1) {
+                    return true;
                 }
             }
         }
