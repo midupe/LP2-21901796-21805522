@@ -9,7 +9,7 @@ public class TestTesouro {
     @Test
     public void getId() throws Exception {
         Tesouro t = new Tesouro(10,1,2,"gold");
-        assertEquals(20,t.getId());
+        assertEquals(10,t.getId());
     }
 
     public void getPontos() throws Exception{
