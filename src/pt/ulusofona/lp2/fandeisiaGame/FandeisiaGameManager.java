@@ -482,6 +482,12 @@ public class FandeisiaGameManager {
         //Implementar
     }
 
+    public Map<String, List<String>> getStatistics() {
+        //implementar
+        Map<String, List<String>> test = new HashMap<String, List<String>>();
+        return test;
+    }
+
     //------------- FUNCOES EXTRA -------------\\
 
     public boolean temBuraco(int x, int y){
