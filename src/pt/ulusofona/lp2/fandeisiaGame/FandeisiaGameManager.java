@@ -91,7 +91,7 @@ public class FandeisiaGameManager {
         return computerArmy;
     }
 
-    public int startGame(String[] content, int rows, int columns) {
+    public void startGame(String[] content, int rows, int columns) throws InsufficientCoinsException {
         this.widthX = columns - 1;
         this.heightY = rows - 1;
         moedasLDR = 50;
@@ -132,18 +132,17 @@ public class FandeisiaGameManager {
             tabuleiro[y][x] = id;
         }
         if (moedasRESISTENCIA < 0 && moedasLDR < 0) {
-            return 1;
+            //return 1;
         }
         if (moedasRESISTENCIA < 0) {
-            return 3;
+            //return 3;
         }
         if (moedasLDR < 0) {
-            return 2;
+            //return 2;
         }
         turnos = 0;
         tesouroApanhadoCurrentTurn = 0;
         criaturas.sort(Comparator.comparing(Creature::getId));
-        return 0;
     }
 
     public void setInitialTeam(int teamId) {

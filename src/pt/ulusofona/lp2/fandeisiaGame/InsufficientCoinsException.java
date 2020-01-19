@@ -1,5 +1,5 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class InsufficientCoinsException {
+public class InsufficientCoinsException extends Throwable {
     
 }
