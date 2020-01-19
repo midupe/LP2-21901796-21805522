@@ -6,7 +6,7 @@ public class InsufficientCoinsException extends Throwable {
         return false;
     }
     public int getRequiredCoinsForTeam(int teamID){
-        //Implementar
+        //implementar
         return 30;
     }
 }
