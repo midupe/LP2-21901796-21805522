@@ -21,7 +21,8 @@ public class FandeisiaGameManager {
     int tesouroApanhadoCurrentTurn;
     int turnoUltimoTesouroApanhado;
 
-    public FandeisiaGameManager() {}
+    public FandeisiaGameManager() {
+    }
 
     public String[][] getCreatureTypes() {
         String[][] creaturesType = new String[5][4];
@@ -111,10 +112,10 @@ public class FandeisiaGameManager {
                 y = Integer.parseInt(data[3].replace(" y: ", ""));
                 Tesouro tesouro = new Tesouro(id, x, y, type);
                 tesouros.add(tesouro);
-            } else if (type.equals("hole")){
+            } else if (type.equals("hole")) {
                 x = Integer.parseInt(data[2].replace(" x: ", ""));
                 y = Integer.parseInt(data[3].replace(" y: ", ""));
-                Buraco hole = new Buraco(id, x,y);
+                Buraco hole = new Buraco(id, x, y);
                 buracos.add(hole);
             } else {
                 int teamId = Integer.parseInt(data[2].replace(" teamId: ", ""));
@@ -149,7 +150,7 @@ public class FandeisiaGameManager {
         currentTeam = teamId;
     }
 
-    public void processTurn(){
+    public void processTurn() {
         if (!gameIsOver()) {
             for (Creature creature : criaturas) {
                 int id = creature.getId();
@@ -237,7 +238,7 @@ public class FandeisiaGameManager {
         int pontosEmJogo = 0;
         int pontosLDR = getCurrentScore(10);
         int pontosRES = getCurrentScore(20);
-        for (Tesouro tesouro: tesouros){
+        for (Tesouro tesouro : tesouros) {
             pontosEmJogo += tesouro.getPontos();
         }
         if (pontosLDR > pontosRES + pontosEmJogo || pontosRES > pontosLDR + pontosEmJogo) {
@@ -274,7 +275,7 @@ public class FandeisiaGameManager {
         resultados.add("Nr. de Turnos jogados: " + turnos);
         resultados.add("-----");
         for (Creature creature : criaturas) {
-            resultados.add(creature.getId() + " : " + creature.getTipo() + " : " + creature.getOuros()+ " : " +
+            resultados.add(creature.getId() + " : " + creature.getTipo() + " : " + creature.getOuros() + " : " +
                     creature.getPratas() + " : " + creature.getBronzes() + " : " + creature.getPontos());
         }
         return resultados;
@@ -306,14 +307,14 @@ public class FandeisiaGameManager {
         }
     }
 
-    public boolean enchant(int x, int y, String spellName){
+    public boolean enchant(int x, int y, String spellName) {
         if (spellName == null) {
             return false;
         }
-        for (Creature creature: criaturas){
+        for (Creature creature : criaturas) {
             if (creature.getX() == x && y == creature.getY()) {
                 int id = creature.getId();
-                if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x,y-1) && !temCriatura(x, y-1)){
+                if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x, y - 1) && !temCriatura(x, y - 1)) {
                     if (gastarMoedas(1)) {
                         creature.aplicarEfeito("EmpurraParaNorte");
                         moverCriatura(id, x, y - 1);
@@ -321,7 +322,7 @@ public class FandeisiaGameManager {
                         return true;
                     }
                 }
-                if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x+1,y) && !temCriatura(x+1, y)){
+                if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x + 1, y) && !temCriatura(x + 1, y)) {
                     if (gastarMoedas(1)) {
                         creature.aplicarEfeito("EmpurraParaEste");
                         moverCriatura(id, x + 1, y);
@@ -329,7 +330,7 @@ public class FandeisiaGameManager {
                         return true;
                     }
                 }
-                if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y+1) && !temCriatura(x, y+1)){
+                if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y + 1) && !temCriatura(x, y + 1)) {
                     if (gastarMoedas(1)) {
                         creature.aplicarEfeito("EmpurraParaSul");
                         moverCriatura(id, x, y + 1);
@@ -338,7 +339,7 @@ public class FandeisiaGameManager {
                     }
                 }
 
-                if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x-1, y) && !temCriatura(x-1, y)){
+                if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x - 1, y) && !temCriatura(x - 1, y)) {
                     if (gastarMoedas(1)) {
                         creature.aplicarEfeito("EmpurraParaOeste");
                         moverCriatura(id, x - 1, y);
@@ -346,71 +347,72 @@ public class FandeisiaGameManager {
                         return true;
                     }
                 }
-                if (spellName.equals("ReduzAlcance")){
+                if (spellName.equals("ReduzAlcance")) {
                     if (gastarMoedas(2)) {
                         creature.aplicarEfeito("ReduzAlcance");
                         return true;
                     }
                 }
-                if (spellName.equals("DuplicaAlcance")){
+                if (spellName.equals("DuplicaAlcance")) {
                     if (gastarMoedas(3)) {
-                        int alcance = creature.getAlcance()*2;
+                        int alcance = creature.getAlcance() * 2;
                         int irX = x;
                         int irY = y;
                         String orientacao = creature.getOrientacao();
                         if (orientacao.equals("Norte")) {
                             irX = x;
-                            irY = y-alcance;
+                            irY = y - alcance;
                         }
                         if (orientacao.equals("Sul")) {
                             irX = x;
-                            irY = y+alcance;
+                            irY = y + alcance;
                         }
                         if (orientacao.equals("Este")) {
-                            irX = x+alcance;
+                            irX = x + alcance;
                             irY = y;
                         }
                         if (orientacao.equals("Oeste")) {
-                            irX = x-alcance;
+                            irX = x - alcance;
                             irY = y;
                         }
                         if (orientacao.equals("Nordeste")) {
-                            irX = x+alcance;
-                            irY = y-alcance;
+                            irX = x + alcance;
+                            irY = y - alcance;
                         }
                         if (orientacao.equals("Noroeste")) {
-                            irX = x-alcance;
-                            irY = y-alcance;
+                            irX = x - alcance;
+                            irY = y - alcance;
                         }
                         if (orientacao.equals("Sudeste")) {
-                            irX = x-alcance;
-                            irY = y+alcance;
+                            irX = x - alcance;
+                            irY = y + alcance;
                         }
                         if (orientacao.equals("Sudoeste")) {
-                            irX = x-alcance;
-                            irY = y+alcance;
+                            irX = x - alcance;
+                            irY = y + alcance;
                         }
-                        if(temBuraco(irX, irY)){
+                        if (temBuraco(irX, irY)) {
                             gastarMoedas(-3);
+                            spellName = null;
                             return false;
                         }
                         creature.aplicarEfeito("DuplicaAlcance");
                         return true;
                     }
                 }
-                if (spellName.equals("Congela")){
+                if (spellName.equals("Congela")) {
                     if (gastarMoedas(3)) {
                         creature.aplicarEfeito("Congela");
                         return true;
                     }
                 }
-                if (spellName.equals("Congela4Ever")){
+                if (spellName.equals("Congela4Ever")) {
                     if (gastarMoedas(10)) {
                         creature.aplicarEfeito("Congela4Ever");
                         return true;
                     }
                 }
-                if (spellName.equals("Descongela")){
+                if (spellName.equals("Descongela")) {
                     if (gastarMoedas(8)) {
                         creature.aplicarEfeito("Descongela");
                         return true;
@@ -422,8 +424,8 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) {
-        for (Creature creature: criaturas) {
-            if(tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")){
+        for (Creature creature : criaturas) {
+            if (tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
                 return creature.getFeiticoAplicado();
             }
         }
@@ -433,9 +435,9 @@ public class FandeisiaGameManager {
     public int getCoinTotal(int teamID) {
         if (teamID == 10) {
             return moedasLDR;
-        } else if (teamID == 20){
+        } else if (teamID == 20) {
             return moedasRESISTENCIA;
-        } else{
+        } else {
             return Integer.parseInt("Erro");
         }
 
@@ -485,31 +487,36 @@ public class FandeisiaGameManager {
     public Map<String, List<String>> getStatistics() {
         //implementar
         Map<String, List<String>> test = new HashMap<String, List<String>>();
+        List<String> maisCarregadas = new ArrayList<>();
+        criaturas.stream()
+                .sorted(c1,c2) ->
+                .limit(3)
+                .forEach(c->maisCarregadas.add(c.getId()+ ":" + c.getTreasure())); //implementar metodo getTreasure
         return test;
     }
 
     //------------- FUNCOES EXTRA -------------\\
 
-    public boolean temBuraco(int x, int y){
-        for (Buraco buraco: buracos){
-            if (buraco.getX() == x && buraco.getY() == y){
+    public boolean temBuraco(int x, int y) {
+        for (Buraco buraco : buracos) {
+            if (buraco.getX() == x && buraco.getY() == y) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean temCriatura(int x, int y){
-        for (Creature creature: criaturas){
-            if (creature.getX() == x && creature.getY() == y){
+    public boolean temCriatura(int x, int y) {
+        for (Creature creature : criaturas) {
+            if (creature.getX() == x && creature.getY() == y) {
                 return true;
             }
         }
         return false;
     }
 
-    public void moverCriatura (int id, int x, int y){
-        for (Creature creature: criaturas) {
+    public void moverCriatura(int id, int x, int y) {
+        for (Creature creature : criaturas) {
             if (creature.getId() == id) {
                 creature.setX(x);
                 creature.setY(y);
@@ -529,7 +536,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    public boolean gastarMoedas (int quantidade) {
+    public boolean gastarMoedas(int quantidade) {
         if (currentTeam == 10 && moedasLDR >= quantidade) {
             moedasLDR -= quantidade;
             return true;
@@ -541,8 +548,8 @@ public class FandeisiaGameManager {
         return false;
     }
 
-    public boolean validarEMoverCriatura(int id){
-        for (Creature creature: criaturas) {
+    public boolean validarEMoverCriatura(int id) {
+        for (Creature creature : criaturas) {
             if (creature.getId() == id && !creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
                 boolean tesouroApanhado = false;
                 int alcance = creature.getAlcance();
@@ -554,40 +561,40 @@ public class FandeisiaGameManager {
                 String orientacao = creature.getOrientacao();
                 if (orientacao.equals("Norte")) {
                     irX = x;
-                    irY = y-alcance;
+                    irY = y - alcance;
                 }
                 if (orientacao.equals("Sul")) {
                     irX = x;
-                    irY = y+alcance;
+                    irY = y + alcance;
                 }
                 if (orientacao.equals("Este")) {
-                    irX = x+alcance;
+                    irX = x + alcance;
                     irY = y;
                 }
                 if (orientacao.equals("Oeste")) {
-                    irX = x-alcance;
+                    irX = x - alcance;
                     irY = y;
                 }
                 if (orientacao.equals("Nordeste")) {
-                    irX = x+alcance;
-                    irY = y-alcance;
+                    irX = x + alcance;
+                    irY = y - alcance;
                 }
                 if (orientacao.equals("Noroeste")) {
-                    irX = x-alcance;
-                    irY = y-alcance;
+                    irX = x - alcance;
+                    irY = y - alcance;
                 }
                 if (orientacao.equals("Sudeste")) {
-                    irX = x-alcance;
-                    irY = y+alcance;
+                    irX = x - alcance;
+                    irY = y + alcance;
                 }
                 if (orientacao.equals("Sudoeste")) {
-                    irX = x-alcance;
-                    irY = y+alcance;
+                    irX = x - alcance;
+                    irY = y + alcance;
                 }
                 if (tipo.equals("Elfo")) {
                     int xElfo = x;
                     int yElfo = y;
-                    if (orientacao.equals("Norte")){
+                    if (orientacao.equals("Norte")) {
                         yElfo--;
                     }
                     if (orientacao.equals("Sul")) {
@@ -621,7 +628,7 @@ public class FandeisiaGameManager {
                         }
                     }
                 }
-                if (tipo.equals("Gigante") && temGigante(x , y, irX, irY)) {
+                if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
@@ -653,11 +660,12 @@ public class FandeisiaGameManager {
         }
         return false;
     }
-    public boolean temGigante(int x , int y, int irX, int irY) {
+
+    public boolean temGigante(int x, int y, int irX, int irY) {
         int i = 0;
         if (x < irX) {
-            for (i = x + 1; i < irX; i++){
-                for (Creature creature: criaturas) {
+            for (i = x + 1; i < irX; i++) {
+                for (Creature creature : criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == i && creature.getY() == y) {
                         return true;
                     }
@@ -665,8 +673,8 @@ public class FandeisiaGameManager {
             }
         }
         if (irX < x) {
-            for (i = irX + 1; i < x; i++){
-                for (Creature creature: criaturas) {
+            for (i = irX + 1; i < x; i++) {
+                for (Creature creature : criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == i && creature.getY() == y) {
                         return true;
                     }
@@ -674,8 +682,8 @@ public class FandeisiaGameManager {
             }
         }
         if (y < irY) {
-            for (i = y + 1; i < irY; i++){
-                for (Creature creature: criaturas) {
+            for (i = y + 1; i < irY; i++) {
+                for (Creature creature : criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == x && creature.getY() == i) {
                         return true;
                     }
@@ -683,8 +691,8 @@ public class FandeisiaGameManager {
             }
         }
         if (irY < y) {
-            for (i = irY + 1; i < y; i++){
-                for (Creature creature: criaturas) {
+            for (i = irY + 1; i < y; i++) {
+                for (Creature creature : criaturas) {
                     if (creature.getTipo().equals("Gigante") && creature.getX() == x && creature.getY() == i) {
                         return true;
                     }
@@ -769,8 +777,8 @@ public class FandeisiaGameManager {
      */
 
     public void limparFeiticos() {
-        for (Creature creature: criaturas){
-            if (!creature.getFeiticoAplicado().equals("Congela4Ever")){
+        for (Creature creature : criaturas) {
+            if (!creature.getFeiticoAplicado().equals("Congela4Ever")) {
                 creature.aplicarEfeito("");
             }
         }

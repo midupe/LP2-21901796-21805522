@@ -35,4 +35,5 @@ public class Tesouro {
     public int getPontos() {
         return pontos;
     }
+
 }
