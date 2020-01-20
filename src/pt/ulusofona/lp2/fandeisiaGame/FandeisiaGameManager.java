@@ -683,7 +683,7 @@ public class FandeisiaGameManager {
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
                 }
-                if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY) {
+                if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY && tabuleiro[irY][irX] <= 0) {
 
                     if (tabuleiro[irY][irX] != 0) {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
@@ -699,14 +699,11 @@ public class FandeisiaGameManager {
                         }
                         tesouros.removeAll(toRemove);
                     }
-
-                    if (tabuleiro[irY][irX] == 0 || tesouroApanhado) {
-                        creature.setX(irX);
-                        creature.setY(irY);
-                        tabuleiro[y][x] = 0;
-                        tabuleiro[irY][irX] = id;
-                        return true;
-                    }
+                    creature.setX(irX);
+                    creature.setY(irY);
+                    tabuleiro[y][x] = 0;
+                    tabuleiro[irY][irX] = id;
+                    return true;
                 }
             }
         }
