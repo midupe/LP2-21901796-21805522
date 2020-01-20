@@ -439,6 +439,11 @@ public class FandeisiaGameManager {
                             irX = x - alcance;
                             irY = y + alcance;
                         }
+                        if (creature.getTipo().equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
+                            gastarMoedas(-3);
+                            spellName = null;
+                            return false;
+                        }
                         if (temBuraco(irX, irY) || temCriatura(irX, irY)) {
                             gastarMoedas(-3);
                             spellName = null;
@@ -673,32 +678,6 @@ public class FandeisiaGameManager {
                     irY = y + alcance;
                 }
                 if (tipo.equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
-                    /*
-                    if (orientacao.equals("Norte") && temCriatura(irX, irY + 1)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Sul") && temCriatura(irX, irY - 1)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Este") && temCriatura(irX - 1, irY)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Oeste") && temCriatura(irX + 1, irY)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Nordeste") && temCriatura(irX - 1, irY + 1)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Noroeste") && temCriatura(irX + 1, irY + 1)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Sudeste") && temCriatura(irX - 1, irY - 1)) {
-                        return false;
-                    }
-                    if (orientacao.equals("Sudoeste") && temCriatura(irX + 1, irY - 1)) {
-                        return false;
-                    }
-                     */
                     return false;
                 }
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
