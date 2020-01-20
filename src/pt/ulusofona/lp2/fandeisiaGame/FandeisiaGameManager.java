@@ -360,7 +360,7 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("DuplicaAlcance")) {
                     if (gastarMoedas(3)) {
-                        int alcance = creature.getAlcance() * 2;
+                        int alcance = creature.getAlcanceOriginal() * 2;
                         int irX = x;
                         int irY = y;
                         String orientacao = creature.getOrientacao();
@@ -425,6 +425,7 @@ public class FandeisiaGameManager {
                 }
             }
         }
+        spellName = null;
         return false;
     }
 
@@ -515,7 +516,7 @@ public class FandeisiaGameManager {
                 .limit(3)
                 .forEach(c->alvosFavoritos.add(c.getId()+ ":"+ c.getEquipa() + ":"+ c.getNumeroFeiticos()));
 
-        return getStatistics();
+        return test;
     }
 
     //------------- FUNCOES EXTRA -------------\\
