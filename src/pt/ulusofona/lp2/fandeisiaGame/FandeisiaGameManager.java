@@ -672,41 +672,31 @@ public class FandeisiaGameManager {
                     irY = y + alcance;
                 }
                 if (tipo.equals("Elfo")) {
-                    int xElfo = x;
-                    int yElfo = y;
-                    if (orientacao.equals("Norte")) {
-                        yElfo--;
+                    if (orientacao.equals("Norte") && temCriatura(irX, irY + 1)) {
+                        return false;
                     }
-                    if (orientacao.equals("Sul")) {
-                        yElfo++;
+                    if (orientacao.equals("Sul") && temCriatura(irX, irY - 1)) {
+                        return false;
                     }
-                    if (orientacao.equals("Este")) {
-                        xElfo++;
+                    if (orientacao.equals("Este") && temCriatura(irX - 1, irY)) {
+                        return false;
                     }
-                    if (orientacao.equals("Oeste")) {
-                        xElfo--;
+                    if (orientacao.equals("Oeste") && temCriatura(irX + 1, irY)) {
+                        return false;
                     }
-                    if (orientacao.equals("Nordeste")) {
-                        xElfo++;
-                        yElfo--;
+                    if (orientacao.equals("Nordeste") && temCriatura(irX - 1, irY + 1)) {
+                        return false;
                     }
-                    if (orientacao.equals("Noroeste")) {
-                        xElfo--;
-                        yElfo--;
+                    if (orientacao.equals("Noroeste") && temCriatura(irX + 1, irY + 1)) {
+                        return false;
                     }
-                    if (orientacao.equals("Sudeste")) {
-                        xElfo++;
-                        yElfo++;
+                    if (orientacao.equals("Sudeste") && temCriatura(irX - 1, irY - 1)) {
+                        return false;
                     }
-                    if (orientacao.equals("Sudoeste")) {
-                        xElfo--;
-                        yElfo++;
+                    if (orientacao.equals("Sudoeste") && temCriatura(irX + 1, irY - 1)) {
+                        return false;
                     }
-                    if (xElfo >= 0 && xElfo <= widthX && yElfo >= 0 && yElfo <= heightY) {
-                        if (tabuleiro[yElfo][xElfo] > 0) {
-                            return false;
-                        }
-                    }
+
                 }
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
@@ -781,80 +771,6 @@ public class FandeisiaGameManager {
         }
         return false;
     }
-
-    /*
-
-    public boolean temPersonagemMovElfo(int x, int y, int irX, int irY, String orientacao) {
-        int i = 0;
-        if (orientacao.equals("Norte") || orientacao.equals("Este") || orientacao.equals("Sul") || orientacao.equals("Oeste")) {
-            if (x < irX) {
-                for (i = x + 1; i < irX; i++) {
-                    for (Creature creature : criaturas) {
-                        if (creature.getX() == i && creature.getY() == y) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (irX < x) {
-                for (i = irX + 1; i < x; i++) {
-                    for (Creature creature : criaturas) {
-                        if (creature.getX() == i && creature.getY() == y) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (y < irY) {
-                for (i = y + 1; i < irY; i++) {
-                    for (Creature creature : criaturas) {
-                        if (creature.getX() == x && creature.getY() == i) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (irY < y) {
-                for (i = irY + 1; i < y; i++) {
-                    for (Creature creature : criaturas) {
-                        if (creature.getX() == x && creature.getY() == i) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        if (orientacao.equals("Nordeste")) {
-            for (Creature creature : criaturas) {
-                if (creature.getX() == x+1 && creature.getY() == y-1) {
-                    return true;
-                }
-            }
-        }
-        if (orientacao.equals("Sudeste")) {
-            for (Creature creature : criaturas) {
-                if (creature.getX() == x+1 && creature.getY() == y+1) {
-                    return true;
-                }
-            }
-        }
-        if (orientacao.equals("Sudoeste")) {
-            for (Creature creature : criaturas) {
-                if (creature.getX() == x-1 && creature.getY() == y+1) {
-                    return true;
-                }
-            }
-        }
-        if (orientacao.equals("Noroeste")) {
-            for (Creature creature : criaturas) {
-                if (creature.getX() == x-1 && creature.getY() == y-1) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-     */
 
     public void limparFeiticos() {
         for (Creature creature : criaturas) {
