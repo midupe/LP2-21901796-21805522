@@ -396,6 +396,11 @@ public class FandeisiaGameManager {
                             spellName = null;
                             return false;
                         }
+                        if (creature.getTipo().equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
+                            gastarMoedas(-2);
+                            spellName = null;
+                            return false;
+                        }
                         creature.aplicarEfeito("ReduzAlcance");
                         creature.setNumeroFeiticos();
                         return true;
@@ -438,6 +443,10 @@ public class FandeisiaGameManager {
                         if (orientacao.equals("Sudoeste")) {
                             irX = x - alcance;
                             irY = y + alcance;
+                        }
+                        if (creature.getFeiticoAplicado().equals("DuplicaAlcance")) {
+                            spellName = null;
+                            return false;
                         }
                         if (creature.getTipo().equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
                             gastarMoedas(-3);
