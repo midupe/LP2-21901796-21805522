@@ -171,6 +171,10 @@ public class Creature {
         return congela4ever;
     }
 
+    public void resetAlcance() {
+        this.alcance = alcanceOriginal;
+    }
+
     public void aplicarEfeito(String feitico) {
         feiticoAplicado = feitico;
         if (feitico.equals("ReduzAlcance")) {
