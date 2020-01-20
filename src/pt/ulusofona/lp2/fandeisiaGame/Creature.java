@@ -178,7 +178,7 @@ public class Creature {
             }
         }
         if (feitico.equals("DuplicaAlcance")) {
-            alcance *= 2;
+            alcance = alcanceOriginal * 2;
         }
         if (feitico.equals("Congela4Ever")) {
             congela4ever = true;
