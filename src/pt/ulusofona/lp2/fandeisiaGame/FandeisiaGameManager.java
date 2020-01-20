@@ -135,7 +135,7 @@ public class FandeisiaGameManager {
         turnos = 0;
         tesouroApanhadoCurrentTurn = 0;
         criaturas.sort(Comparator.comparing(Creature::getId));
-        if (moedasRESISTENCIA<0 || moedasLDR<0) {
+        if (moedasRESISTENCIA < 0 || moedasLDR < 0) {
             throw new InsufficientCoinsException(moedasLDR, moedasRESISTENCIA);
         }
     }
@@ -672,7 +672,8 @@ public class FandeisiaGameManager {
                     irX = x - alcance;
                     irY = y + alcance;
                 }
-                if (tipo.equals("Elfo")) {
+                if (tipo.equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
+                    /*
                     if (orientacao.equals("Norte") && temCriatura(irX, irY + 1)) {
                         return false;
                     }
@@ -697,7 +698,8 @@ public class FandeisiaGameManager {
                     if (orientacao.equals("Sudoeste") && temCriatura(irX + 1, irY - 1)) {
                         return false;
                     }
-
+                     */
+                    return false;
                 }
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
@@ -779,5 +781,91 @@ public class FandeisiaGameManager {
                 creature.aplicarEfeito("");
             }
         }
+    }
+
+    public boolean temCriaturasEntre(int x, int y, int irX, int irY) {
+        int i = 0;
+        int j = 0;
+        if (x < irX && y < irY) {
+            for (i = x + 1; i < irX; i++) {
+                for (j = y + 1; j < irY; j++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x > irX && y > irY) {
+            for (i = irX + 1; i < x; i++) {
+                for (j = irY + 1; j < y; j++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x > irX && y < irY) {
+            for (i = irX + 1; i < x; i++) {
+                for (j = y + 1; j < irY; j++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x < irX && y > irY) {
+            for (i = x + 1; i < irX; i++) {
+                for (j = irY + 1; j < y; j++) {
+                    for (Creature creature : criaturas) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x < irX) {
+            for (i = x + 1; i < irX; i++) {
+                for (Creature creature : criaturas) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irX < x) {
+            for (i = irX + 1; i < x; i++) {
+                for (Creature creature : criaturas) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (y < irY) {
+            for (i = y + 1; i < irY; i++) {
+                for (Creature creature : criaturas) {
+                    if (creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irY < y) {
+            for (i = irY + 1; i < y; i++) {
+                for (Creature creature : criaturas) {
+                    if (creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
