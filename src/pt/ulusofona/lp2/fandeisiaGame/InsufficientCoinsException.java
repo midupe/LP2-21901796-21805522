@@ -5,8 +5,8 @@ public class InsufficientCoinsException extends Exception {
     int requiredRESISTENCIA;
 
     public InsufficientCoinsException(int requiredLDR, int requiredRESISTENDICA){
-        this.requiredLDR = requiredLDR;
-        this.requiredRESISTENCIA = requiredRESISTENDICA;
+        this.requiredLDR = 50 - requiredLDR;
+        this.requiredRESISTENCIA = 50 - requiredRESISTENDICA;
     }
 
     public boolean teamRequiresMoreCoins(int teamId){

@@ -93,8 +93,6 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) throws InsufficientCoinsException {
-        int requiredLDR = 0;
-        int requiredRESISTENCIA = 0;
         this.widthX = columns - 1;
         this.heightY = rows - 1;
         moedasLDR = 50;
@@ -128,10 +126,8 @@ public class FandeisiaGameManager {
                 criaturas.add(creature);
                 if (teamId == 10) {
                     moedasLDR -= creature.getCusto();
-                    requiredLDR +=creature.getCusto();
                 } else {
                     moedasRESISTENCIA -= creature.getCusto();
-                    requiredRESISTENCIA += creature.getCusto();
                 }
             }
             tabuleiro[y][x] = id;
@@ -139,7 +135,9 @@ public class FandeisiaGameManager {
         turnos = 0;
         tesouroApanhadoCurrentTurn = 0;
         criaturas.sort(Comparator.comparing(Creature::getId));
-        throw new InsufficientCoinsException(requiredLDR, requiredRESISTENCIA);
+        if (moedasRESISTENCIA<0 || moedasLDR<0) {
+            throw new InsufficientCoinsException(moedasLDR, moedasRESISTENCIA);
+        }
     }
 
 
@@ -453,18 +451,21 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("Congela")) {
                     if (gastarMoedas(3)) {
+                        creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Congela");
                         return true;
                     }
                 }
                 if (spellName.equals("Congela4Ever")) {
                     if (gastarMoedas(10)) {
+                        creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Congela4Ever");
                         return true;
                     }
                 }
                 if (spellName.equals("Descongela")) {
                     if (gastarMoedas(8)) {
+                        creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Descongela");
                         return true;
                     }
