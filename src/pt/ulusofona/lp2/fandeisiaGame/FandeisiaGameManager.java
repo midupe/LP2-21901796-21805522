@@ -319,6 +319,7 @@ public class FandeisiaGameManager {
                         creature.aplicarEfeito("EmpurraParaNorte");
                         moverCriatura(id, x, y - 1);
                         tabuleiro[y][x] = 0;
+                        creature.setNumeroFeiticos();
                         return true;
                     }
                 }
@@ -327,6 +328,7 @@ public class FandeisiaGameManager {
                         creature.aplicarEfeito("EmpurraParaEste");
                         moverCriatura(id, x + 1, y);
                         tabuleiro[y][x] = 0;
+                        creature.setNumeroFeiticos();
                         return true;
                     }
                 }
@@ -335,6 +337,7 @@ public class FandeisiaGameManager {
                         creature.aplicarEfeito("EmpurraParaSul");
                         moverCriatura(id, x, y + 1);
                         tabuleiro[y][x] = 0;
+                        creature.setNumeroFeiticos();
                         return true;
                     }
                 }
@@ -344,12 +347,14 @@ public class FandeisiaGameManager {
                         creature.aplicarEfeito("EmpurraParaOeste");
                         moverCriatura(id, x - 1, y);
                         tabuleiro[y][x] = 0;
+                        creature.setNumeroFeiticos();
                         return true;
                     }
                 }
                 if (spellName.equals("ReduzAlcance")) {
                     if (gastarMoedas(2)) {
                         creature.aplicarEfeito("ReduzAlcance");
+                        creature.setNumeroFeiticos();
                         return true;
                     }
                 }
@@ -489,10 +494,28 @@ public class FandeisiaGameManager {
         Map<String, List<String>> test = new HashMap<String, List<String>>();
         List<String> maisCarregadas = new ArrayList<>();
         criaturas.stream()
-                .sorted(c1,c2) ->
+                .sorted((c2,c1) -> c1.getTesouros() - c2.getTesouros())
                 .limit(3)
-                .forEach(c->maisCarregadas.add(c.getId()+ ":" + c.getTreasure())); //implementar metodo getTreasure
-        return test;
+                .forEach(c->maisCarregadas.add(c.getId()+ ":" + c.getTesouros()));
+
+        List<String> maisRicas = new ArrayList<>();
+        criaturas.stream()
+                .sorted((c2,c1) -> c1.getPontos() - c2.getPontos())
+                .limit(5)
+                .forEach(c->maisRicas.add(c.getId()+ ":"+ c.getPontos()+ ":"+c.getTesouros()));
+        Comparator<Creature> pontos = Comparator
+                .comparing(Creature::getPontos);
+        Comparator<Creature> tesouros = Comparator
+                .comparing(Creature::getTesouros);
+        Collections.sort(criaturas,tesouros);
+
+        List<String> alvosFavoritos = new ArrayList<>();
+        criaturas.stream()
+                .sorted((c2,c1) -> c1.getId() - c2.getNumeroFeiticos())
+                .limit(3)
+                .forEach(c->alvosFavoritos.add(c.getId()+ ":"+ c.getEquipa() + ":"+ c.getNumeroFeiticos()));
+
+        return getStatistics();
     }
 
     //------------- FUNCOES EXTRA -------------\\

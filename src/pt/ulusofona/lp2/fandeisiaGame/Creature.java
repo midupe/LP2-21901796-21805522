@@ -19,6 +19,7 @@ public class Creature {
     String feiticoAplicado = "";
     int alcanceOriginal;
     boolean congela4ever = false;
+    int numeroFeiticos = 0;
 
     public boolean getMoverDiagonal() {
         return moverDiagonal;
@@ -185,5 +186,17 @@ public class Creature {
         if (feitico.equals("Descongela")) {
             congela4ever = false;
         }
+    }
+
+    public int getTesouros() {
+        return ouros + pratas + bronzes;
+    }
+
+    public void setNumeroFeiticos (){
+        numeroFeiticos++;
+    }
+
+    public int getNumeroFeiticos() {
+        return numeroFeiticos;
     }
 }
