@@ -12,7 +12,6 @@ public class FandeisiaGameManager {
     ArrayList<Buraco> buracos;
     int widthX;
     int heightY;
-    String spell = null;
     int[][] tabuleiro;
     int moedasLDR = 50;
     int moedasRESISTENCIA = 50;
@@ -305,7 +304,6 @@ public class FandeisiaGameManager {
     }
 
     public boolean enchant(int x, int y, String spellName) {
-        spell = null;
         if (spellName == null) {
             return false;
         }
@@ -318,7 +316,6 @@ public class FandeisiaGameManager {
                         moverCriatura(id, x, y - 1);
                         tabuleiro[y][x] = 0;
                         creature.setNumeroFeiticos();
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -328,7 +325,6 @@ public class FandeisiaGameManager {
                         moverCriatura(id, x + 1, y);
                         tabuleiro[y][x] = 0;
                         creature.setNumeroFeiticos();
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -338,7 +334,6 @@ public class FandeisiaGameManager {
                         moverCriatura(id, x, y + 1);
                         tabuleiro[y][x] = 0;
                         creature.setNumeroFeiticos();
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -349,7 +344,6 @@ public class FandeisiaGameManager {
                         moverCriatura(id, x - 1, y);
                         tabuleiro[y][x] = 0;
                         creature.setNumeroFeiticos();
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -408,7 +402,6 @@ public class FandeisiaGameManager {
                         }
                         creature.aplicarEfeito("ReduzAlcance");
                         creature.setNumeroFeiticos();
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -466,7 +459,6 @@ public class FandeisiaGameManager {
                         }
                         creature.setNumeroFeiticos();
                         creature.aplicarEfeito("DuplicaAlcance");
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -474,7 +466,6 @@ public class FandeisiaGameManager {
                     if (gastarMoedas(3)) {
                         creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Congela");
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -482,7 +473,6 @@ public class FandeisiaGameManager {
                     if (gastarMoedas(10)) {
                         creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Congela4Ever");
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -490,7 +480,6 @@ public class FandeisiaGameManager {
                     if (gastarMoedas(8)) {
                         creature.setNumeroFeiticos();
                         creature.aplicarEfeito("Descongela");
-                        spell = spellName;
                         return true;
                     }
                 }
@@ -501,14 +490,13 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) {
-        /*
+        String feitico = null;
         for (Creature creature : criaturas) {
             if (tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
-                return creature.getFeiticoAplicado();
+                feitico = creature.getFeiticoAplicado();
             }
         }
-        */
-        return spell;
+        return feitico;
     }
 
     public int getCoinTotal(int teamID) {
