@@ -132,6 +132,9 @@ public class Creature {
     public int getId() {
         return id;
     }
+    public int totalTesouros() {
+        return ouros + pratas + bronzes;
+    }
 
     public int getOuros() {
         return ouros;

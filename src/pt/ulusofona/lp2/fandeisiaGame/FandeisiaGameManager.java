@@ -541,14 +541,14 @@ public class FandeisiaGameManager {
     }
 
     public Map<String, List<String>> getStatistics() {
-        Map<String, List<String>> statistics = new HashMap<String, List<String>>();
+        Map<String, List<String>> statistics = new HashMap<>();
 
         List<String> maisCarregadas = new ArrayList<>();
         //corrigir - implementar
         criaturas.stream()
-                .sorted((c2,c1) -> c1.getTesouros() - c2.getTesouros())
+                .sorted((c2,c1) -> c1.totalTesouros() - c2.totalTesouros())
                 .limit(3)
-                .forEach(c->maisCarregadas.add(c.getId()+ ":" + c.getTesouros()));
+                .forEach(c->maisCarregadas.add(c.getId()+ ":" + c.totalTesouros()));
 
         List<String> maisRicas = new ArrayList<>();
         criaturas.stream()
@@ -573,10 +573,10 @@ public class FandeisiaGameManager {
         List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
         //implementar
 
-        statistics.put("as3maisCarregadas", maisCarregadas);
+        statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
-        statistics.put("as3maisViajadas", asMaisViajadas);
+        statistics.put("as3MaisViajadas", asMaisViajadas);
         statistics.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
         return statistics;
     }
