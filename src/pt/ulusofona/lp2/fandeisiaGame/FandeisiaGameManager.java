@@ -535,9 +535,10 @@ public class FandeisiaGameManager {
     }
 
     public Map<String, List<String>> getStatistics() {
-        //implementar
-        Map<String, List<String>> test = new HashMap<String, List<String>>();
+        Map<String, List<String>> statistics = new HashMap<String, List<String>>();
+
         List<String> maisCarregadas = new ArrayList<>();
+        //corrigir - implementar
         criaturas.stream()
                 .sorted((c2,c1) -> c1.getTesouros() - c2.getTesouros())
                 .limit(3)
@@ -548,11 +549,11 @@ public class FandeisiaGameManager {
                 .sorted((c2,c1) -> c1.getPontos() - c2.getPontos())
                 .limit(5)
                 .forEach(c->maisRicas.add(c.getId()+ ":"+ c.getPontos()+ ":"+c.getTesouros()));
-        Comparator<Creature> pontos = Comparator
+                Comparator<Creature> pontos = Comparator
                 .comparing(Creature::getPontos);
-        Comparator<Creature> tesouros = Comparator
+                Comparator<Creature> tesouros = Comparator
                 .comparing(Creature::getTesouros);
-        Collections.sort(criaturas,tesouros);
+                Collections.sort(criaturas,tesouros);
 
         List<String> alvosFavoritos = new ArrayList<>();
         criaturas.stream()
@@ -560,7 +561,18 @@ public class FandeisiaGameManager {
                 .limit(3)
                 .forEach(c->alvosFavoritos.add(c.getId()+ ":"+ c.getEquipa() + ":"+ c.getNumeroFeiticos()));
 
-        return test;
+        List<String> asMaisViajadas = new ArrayList<>();
+        //implementar
+
+        List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
+        //implementar
+
+        statistics.put("as3maisCarregadas", maisCarregadas);
+        statistics.put("as5MaisRicas", maisRicas);
+        statistics.put("osAlvosFavoritos", alvosFavoritos);
+        statistics.put("as3maisViajadas", asMaisViajadas);
+        statistics.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
+        return statistics;
     }
 
     //------------- FUNCOES EXTRA -------------\\
