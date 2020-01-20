@@ -563,7 +563,7 @@ public class FandeisiaGameManager {
 
         List<String> alvosFavoritos = new ArrayList<>();
         criaturas.stream()
-                .sorted((c2,c1) -> c1.getId() - c2.getNumeroFeiticos())
+                .sorted((c2,c1) -> c1.getNumeroFeiticos() - c2.getNumeroFeiticos())
                 .limit(3)
                 .forEach(c->alvosFavoritos.add(c.getId()+ ":"+ c.getEquipa() + ":"+ c.getNumeroFeiticos()));
 
