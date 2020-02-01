@@ -24,7 +24,7 @@ public class FandeisiaGameManager {
     }
 
     public String[][] getCreatureTypes() {
-        String[][] creaturesType = new String[5][4];
+        String[][] creaturesType = new String[6][4];
         creaturesType[0][0] = "Anão";
         creaturesType[0][1] = "Anao.png";
         creaturesType[0][2] = "Sou pequeno";
@@ -45,6 +45,10 @@ public class FandeisiaGameManager {
         creaturesType[4][1] = "Humano.png";
         creaturesType[4][2] = "Tem vida";
         creaturesType[4][3] = "3";
+        creaturesType[5][0] = "Druída";
+        creaturesType[5][1] = "Druida.png";
+        creaturesType[5][2] = "Largo tesouros";
+        creaturesType[5][3] = "4";
         return creaturesType;
     }
 
@@ -582,11 +586,17 @@ public class FandeisiaGameManager {
         List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
         //implementar
 
+        List<String> viradosPara = new ArrayList<>();
+        //implementar
+        List<String> asMaisEficientes = new ArrayList<>();
+        //implementar
+
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
         statistics.put("as3MaisViajadas", asMaisViajadas);
-        statistics.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
+        statistics.put("viradosPara", viradosPara);
+        statistics.put("asMaisEficientes", asMaisEficientes);
         return statistics;
     }
 
