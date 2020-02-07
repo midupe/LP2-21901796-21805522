@@ -107,7 +107,8 @@ public class Creature {
             alcance = 2;
             custo = 3;
         }
-        if (tipo.equals("Druida")){
+        if (tipo.equals("Druída")){
+            tipof = "Druida";
             alcance = 1;
             custo = 4;
             //tem particularidades no movimento e alcance
