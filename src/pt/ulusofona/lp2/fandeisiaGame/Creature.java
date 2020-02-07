@@ -20,6 +20,8 @@ public class Creature {
     int alcanceOriginal;
     boolean congela4ever = false;
     int numeroFeiticos = 0;
+    int racio;
+    int km;
 
     public boolean getMoverDiagonal() {
         return moverDiagonal;
@@ -214,5 +216,9 @@ public class Creature {
 
     public int getNumeroFeiticos() {
         return numeroFeiticos;
+    }
+
+    public int getRacio() {
+        return km/numTesourosEncontrados;
     }
 }

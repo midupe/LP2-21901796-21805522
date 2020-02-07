@@ -589,7 +589,47 @@ public class FandeisiaGameManager {
         List<String> viradosPara = new ArrayList<>();
         //implementar
         List<String> asMaisEficientes = new ArrayList<>();
-        //implementar
+        long countNorte =
+                criaturas.stream()
+                .filter((r)-> r.getOrientacao().equals("Norte"))
+                .count();
+
+        long countSul =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Sul"))
+                        .count();
+
+        long countNordeste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Nordeste"))
+                        .count();
+
+        long countNoroeste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Noroeste"))
+                        .count();
+
+        long countSudeste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Sudeste"))
+                        .count();
+
+        long countSudoeste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Sudoeste"))
+                        .count();
+
+        long countOeste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Oeste"))
+                        .count();
+
+        long countEste =
+                criaturas.stream()
+                        .filter((r)-> r.getOrientacao().equals("Este"))
+                        .count();
+
+
 
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
