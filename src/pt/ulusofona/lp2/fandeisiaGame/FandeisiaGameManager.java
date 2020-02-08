@@ -652,7 +652,7 @@ public class FandeisiaGameManager {
                         .filter((r) -> r.getOrientacao().equals("Este"))
                         .count();
         criaturas.stream()
-                .forEach(c1-> asMaisEficientes.add(c1.getOrientacao() + ":" + c1.getNumCriaturas()));
+                .forEach(c1-> asMaisEficientes.add(c1.getOrientacao() + ":" + c1.getTesouros()));
 
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
