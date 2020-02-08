@@ -23,6 +23,7 @@ public class Creature {
     int racio;
     int km;
 
+
     public boolean getMoverDiagonal() {
         return moverDiagonal;
     }

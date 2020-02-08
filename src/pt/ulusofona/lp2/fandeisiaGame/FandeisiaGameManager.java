@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import static java.util.stream.Collectors.counting;
+
 public class FandeisiaGameManager {
 
     ArrayList<Creature> criaturas;
@@ -87,11 +89,12 @@ public class FandeisiaGameManager {
     public Map<String, Integer> createComputerArmy() {
         Random r = new Random();
         Map<String, Integer> computerArmy = new HashMap<>();
-        computerArmy.put("Anão", r.nextInt(3));
+        computerArmy.put("Anão", 1);
+        /*computerArmy.put("Anão", r.nextInt(3));
         computerArmy.put("Dragão", r.nextInt(3));
         computerArmy.put("Elfo", r.nextInt(3));
         computerArmy.put("Gigante", r.nextInt(3));
-        computerArmy.put("Humano", r.nextInt(3));
+        computerArmy.put("Humano", r.nextInt(3));*/
         return computerArmy;
     }
 
@@ -496,6 +499,26 @@ public class FandeisiaGameManager {
     public String getSpell(int x, int y) {
         String feitico = null;
         for (Creature creature : criaturas) {
+            if(creature.getFeiticoAplicado().equals("EmpurraParaNorte")){
+                if (tabuleiro[y+1][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
+                    feitico = creature.getFeiticoAplicado();
+                }
+            }
+            if(creature.getFeiticoAplicado().equals("EmpurraParaSul")){
+                if (tabuleiro[y-1][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
+                    feitico = creature.getFeiticoAplicado();
+                }
+            }
+            if(creature.getFeiticoAplicado().equals("EmpurraParaEste")){
+                if (tabuleiro[y][x-1] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
+                    feitico = creature.getFeiticoAplicado();
+                }
+            }
+            if(creature.getFeiticoAplicado().equals("EmpurraParaOeste")){
+                if (tabuleiro[y][x+1] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
+                    feitico = creature.getFeiticoAplicado();
+                }
+            }
             if (tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
                 feitico = creature.getFeiticoAplicado();
             }
@@ -626,10 +649,10 @@ public class FandeisiaGameManager {
 
         long countEste =
                 criaturas.stream()
-                        .filter((r)-> r.getOrientacao().equals("Este"))
+                        .filter((r) -> r.getOrientacao().equals("Este"))
                         .count();
-
-
+        criaturas.stream()
+                .forEach(c1-> asMaisEficientes.add(c1.getOrientacao() + ":" + c1.getNumCriaturas()));
 
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
