@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.counting;
 
@@ -610,12 +611,10 @@ public class FandeisiaGameManager {
         //implementar
 
         List<String> viradosPara = new ArrayList<>();
-        //implementar
-        List<String> asMaisEficientes = new ArrayList<>();
         long countNorte =
                 criaturas.stream()
-                .filter((r)-> r.getOrientacao().equals("Norte"))
-                .count();
+                        .filter((r)-> r.getOrientacao().equals("Norte"))
+                        .count();
 
         long countSul =
                 criaturas.stream()
@@ -651,14 +650,31 @@ public class FandeisiaGameManager {
                 criaturas.stream()
                         .filter((r) -> r.getOrientacao().equals("Este"))
                         .count();
-        criaturas.stream()
-                .forEach(c1-> asMaisEficientes.add(c1.getOrientacao() + ":" + c1.getTesouros()));
+
+        Map<String, Long> mapa = new HashMap<>();
+        mapa.put("Sul",countSul);
+        mapa.put("Norte",countNorte);
+        mapa.put("Nordeste",countNordeste);
+        mapa.put("Noroeste",countNoroeste);
+        mapa.put("Sudeste",countSudeste);
+        mapa.put("Sudoeste",countSudoeste);
+        mapa.put("Este",countEste);
+        mapa.put("Oeste",countOeste);
+
+
+        List<String> nrVirados = mapa.entrySet()
+                .stream()
+                .sorted((Map.Entry.<String, Long>comparingByValue().reversed()).thenComparing(Map.Entry.comparingByKey())).
+                        map(c1 -> c1.getKey() + ":" + c1.getValue()).collect(Collectors.toList());
+
+        List<String> asMaisEficientes = new ArrayList<>();
+        //Implementar dp do movimentar estar feito
 
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
         statistics.put("as3MaisViajadas", asMaisViajadas);
-        statistics.put("viradosPara", viradosPara);
+        statistics.put("viradosPara", nrVirados);
         statistics.put("asMaisEficientes", asMaisEficientes);
         return statistics;
     }
