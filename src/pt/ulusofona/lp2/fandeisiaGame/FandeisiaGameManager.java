@@ -34,11 +34,11 @@ public class FandeisiaGameManager {
         creaturesType[0][3] = "1";
         creaturesType[1][0] = "Dragão";
         creaturesType[1][1] = "Dragao.png";
-        creaturesType[1][2] = "Consegue fazer cenas";
+        creaturesType[1][2] = "Pode voar por cima das outras criaturas";
         creaturesType[1][3] = "9";
         creaturesType[2][0] = "Elfo";
         creaturesType[2][1] = "Elfo.png";
-        creaturesType[2][2] = "Pode voar por cima das outras criaturas";
+        creaturesType[2][2] = "Consegue fazer cenas";
         creaturesType[2][3] = "5";
         creaturesType[3][0] = "Gigante";
         creaturesType[3][1] = "Gigante.png";
@@ -763,6 +763,9 @@ public class FandeisiaGameManager {
                     return false;
                 }
                 if (temBuraco(irX, irY)){
+                    return false;
+                }
+                if (temCriatura(irX, irY)){
                     return false;
                 }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY && tabuleiro[irY][irX] <= 0) {
