@@ -206,7 +206,6 @@ public class FandeisiaGameManager {
                 }
                 creature.resetAlcance();
                 //DEBUG AREA
-                System.out.println(creature);
                 for (int i = 0; i < heightY; i ++) {
                     for (int j = 0; j < widthX; j++) {
                         if (getSpell(j,i)!= null) {
@@ -232,8 +231,9 @@ public class FandeisiaGameManager {
                 }
                 currentTeam = 10;
             }
-            limparFeiticos();
             tesouroApanhadoCurrentTurn = 0;
+            limparFeiticos();
+            buracosCount = 0;
             turnos++;
         }
     }
@@ -544,7 +544,6 @@ public class FandeisiaGameManager {
             }
         }
         if (feitico!= null && feitico.equals("")) {
-            limparFeiticos();
             return null;
         }
         return feitico;
