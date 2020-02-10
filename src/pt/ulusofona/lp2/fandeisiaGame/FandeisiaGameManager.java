@@ -204,6 +204,7 @@ public class FandeisiaGameManager {
                     creature.getImagePNG();
                 }
                 creature.resetAlcance();
+                System.out.println(creature);
             }
             if (currentTeam == 10) {
                 if (tesouroApanhadoCurrentTurn > 0) {
@@ -781,8 +782,10 @@ public class FandeisiaGameManager {
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
                 }
+                if (temBuraco(irX, irY)){
+                    return false;
+                }
                 if (irX >= 0 && irX <= widthX && irY >= 0 && irY <= heightY && tabuleiro[irY][irX] <= 0) {
-
                     if (tabuleiro[irY][irX] != 0) {
                         List<Tesouro> toRemove = new ArrayList<Tesouro>();
                         for (Tesouro tesouro : tesouros) {
