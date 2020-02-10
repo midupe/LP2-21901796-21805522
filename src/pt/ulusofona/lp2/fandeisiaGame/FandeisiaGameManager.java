@@ -671,6 +671,7 @@ public class FandeisiaGameManager {
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
         statistics.put("as3MaisViajadas", asMaisViajadas);
+        statistics.put("TiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
         statistics.put("viradosPara", nrVirados);
         statistics.put("asMaisEficientes", asMaisEficientes);
         return statistics;
@@ -816,6 +817,7 @@ public class FandeisiaGameManager {
                             tesouros.add(tesouro);
                         }
                     }
+                    creature.incrementarKm(creature.getAlcance(turnos));
                     return true;
                 }
             }
