@@ -358,7 +358,7 @@ public class FandeisiaGameManager {
                 }
                 if (spellName.equals("ReduzAlcance")) {
                     if (gastarMoedas(2)) {
-                        int alcance = creature.getAlcance();
+                        int alcance = creature.getAlcance(turnos);
                         if (alcance == creature.getAlcanceOriginal()) {
                             alcance = 1;
                         } else {
@@ -739,7 +739,7 @@ public class FandeisiaGameManager {
         for (Creature creature : criaturas) {
             if (creature.getId() == id && !creature.getFeiticoAplicado().equals("Congela") && !creature.isCongela4ever()) {
                 boolean tesouroApanhado = false;
-                int alcance = creature.getAlcance();
+                int alcance = creature.getAlcance(turnos);
                 int x = creature.getX();
                 int y = creature.getY();
                 int irX = x;

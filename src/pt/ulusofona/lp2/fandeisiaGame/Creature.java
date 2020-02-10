@@ -63,7 +63,19 @@ public class Creature {
         return orientacao;
     }
 
-    public int getAlcance() {
+    public int getAlcance(int turno) {
+        turno++;
+        if (tipo.equals("Druída")) {
+            if (turno%2 == 0) {
+                alcance = 2;
+                alcanceOriginal = 2;
+                return 2;
+            } else {
+                alcance = 1;
+                alcanceOriginal = 1;
+                return 1;
+            }
+        }
         return alcance;
     }
     public int getAlcanceOriginal() {
