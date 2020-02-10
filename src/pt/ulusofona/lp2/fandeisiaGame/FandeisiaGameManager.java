@@ -392,7 +392,7 @@ public class FandeisiaGameManager {
                             irY = y - alcance;
                         }
                         if (orientacao.equals("Sudeste")) {
-                            irX = x - alcance;
+                            irX = x + alcance;
                             irY = y + alcance;
                         }
                         if (orientacao.equals("Sudoeste")) {
@@ -445,7 +445,7 @@ public class FandeisiaGameManager {
                             irY = y - alcance;
                         }
                         if (orientacao.equals("Sudeste")) {
-                            irX = x - alcance;
+                            irX = x + alcance;
                             irY = y + alcance;
                         }
                         if (orientacao.equals("Sudoeste")) {
@@ -500,6 +500,8 @@ public class FandeisiaGameManager {
 
     public String getSpell(int x, int y) {
         String feitico = null;
+        //TODO
+        // alterar
         for (Creature creature : criaturas) {
             if(creature.getFeiticoAplicado().equals("EmpurraParaNorte")){
                 if (tabuleiro[y+1][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
@@ -769,7 +771,7 @@ public class FandeisiaGameManager {
                     irY = y - alcance;
                 }
                 if (orientacao.equals("Sudeste")) {
-                    irX = x - alcance;
+                    irX = x + alcance;
                     irY = y + alcance;
                 }
                 if (orientacao.equals("Sudoeste")) {
