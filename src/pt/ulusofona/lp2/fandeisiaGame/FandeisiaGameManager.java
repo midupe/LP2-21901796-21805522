@@ -500,29 +500,7 @@ public class FandeisiaGameManager {
 
     public String getSpell(int x, int y) {
         String feitico = null;
-        //TODO
-        // alterar
         for (Creature creature : criaturas) {
-            if(creature.getFeiticoAplicado().equals("EmpurraParaNorte")){
-                if (tabuleiro[y+1][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
-                    feitico = creature.getFeiticoAplicado();
-                }
-            }
-            if(creature.getFeiticoAplicado().equals("EmpurraParaSul")){
-                if (tabuleiro[y-1][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
-                    feitico = creature.getFeiticoAplicado();
-                }
-            }
-            if(creature.getFeiticoAplicado().equals("EmpurraParaEste")){
-                if (tabuleiro[y][x-1] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
-                    feitico = creature.getFeiticoAplicado();
-                }
-            }
-            if(creature.getFeiticoAplicado().equals("EmpurraParaOeste")){
-                if (tabuleiro[y][x+1] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
-                    feitico = creature.getFeiticoAplicado();
-                }
-            }
             if (tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
                 feitico = creature.getFeiticoAplicado();
             }
