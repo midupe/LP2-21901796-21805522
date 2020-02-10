@@ -452,6 +452,10 @@ public class FandeisiaGameManager {
                             irX = x - alcance;
                             irY = y + alcance;
                         }
+                        if ((irX < 0 || irX > widthX) || (irY < 0 || irY > heightY)){
+                            gastarMoedas(-3);
+                            return false;
+                        }
                         if (creature.getFeiticoAplicado().equals("DuplicaAlcance")) {
                             gastarMoedas(-3);
                             return false;
