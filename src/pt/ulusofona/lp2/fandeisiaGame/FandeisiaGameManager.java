@@ -623,7 +623,11 @@ public class FandeisiaGameManager {
                 .forEach(c->alvosFavoritos.add(c.getId()+ ":"+ c.getEquipa() + ":"+ c.getNumeroFeiticos()));
 
         List<String> asMaisViajadas = new ArrayList<>();
-        //implementar
+        criaturas.stream()
+                .sorted((c2,c1)-> c1.getKm() - c2.getKm())
+                .limit(3)
+                .sorted((c1,c2)-> c1.getKm() - c2.getKm())
+                .forEach(c-> asMaisViajadas.add(c.getId() + ":" + c.getKm()));
 
         List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
         //implementar
@@ -687,10 +691,11 @@ public class FandeisiaGameManager {
 
         List<String> asMaisEficientes = new ArrayList<>();
         criaturas.stream()
-                .sorted(Comparator.comparingInt(Creature::getRacio))
+                .sorted((c2,c1) -> c1.getRacio() - c2.getRacio())
                 .limit(3)
                 .forEach(c-> asMaisEficientes.add(c.getId() + ":" + c.getTesouros() + ":" + c.getKm()));
 
+        System.out.println(asMaisEficientes);
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
