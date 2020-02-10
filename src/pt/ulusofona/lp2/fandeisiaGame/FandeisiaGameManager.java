@@ -22,7 +22,7 @@ public class FandeisiaGameManager {
     int currentTeam;
     int tesouroApanhadoCurrentTurn;
     int turnoUltimoTesouroApanhado;
-
+    int buracosCount = 0;
     public FandeisiaGameManager() {
     }
 
@@ -453,10 +453,26 @@ public class FandeisiaGameManager {
                             irY = y + alcance;
                         }
                         if (creature.getFeiticoAplicado().equals("DuplicaAlcance")) {
+                            gastarMoedas(-3);
                             spellName = null;
                             return false;
                         }
-                        if (creature.getTipo().equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
+                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
+                            gastarMoedas(-3);
+                            spellName = null;
+                            return false;
+                        }
+                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
+                            gastarMoedas(-3);
+                            spellName = null;
+                            return false;
+                        }
+                        if (creature.getTipo().equals("Gigante") && temGigante(x, y, irX, irY)) {
+                            gastarMoedas(-3);
+                            spellName = null;
+                            return false;
+                        }
+                        if (creature.getTipo().equals("Elfo") && buracosCount > 1) {
                             gastarMoedas(-3);
                             spellName = null;
                             return false;
@@ -663,8 +679,10 @@ public class FandeisiaGameManager {
     //------------- FUNCOES EXTRA -------------\\
 
     public boolean temBuraco(int x, int y) {
+        buracosCount = 0;
         for (Buraco buraco : buracos) {
             if (buraco.getX() == x && buraco.getY() == y) {
+                buracosCount++;
                 return true;
             }
         }
