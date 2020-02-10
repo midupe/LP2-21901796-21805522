@@ -530,6 +530,7 @@ public class FandeisiaGameManager {
         return false;
     }
 
+
     public String getSpell(int x, int y) {
         int id = tabuleiro[y][x];
         String feitico = "";
