@@ -590,7 +590,7 @@ public class FandeisiaGameManager {
                 .comparing(Creature::getPontos);
                 Comparator<Creature> tesouros = Comparator
                 .comparing(Creature::getTesouros);
-                Collections.sort(criaturas,tesouros);
+                criaturas.sort(tesouros);
 
         List<String> alvosFavoritos = new ArrayList<>();
         criaturas.stream()
@@ -662,7 +662,10 @@ public class FandeisiaGameManager {
                         map(c1 -> c1.getKey() + ":" + c1.getValue()).collect(Collectors.toList());
 
         List<String> asMaisEficientes = new ArrayList<>();
-        //Implementar dp do movimentar estar feito
+        criaturas.stream()
+                .sorted(Comparator.comparingInt(Creature::getRacio))
+                .limit(3)
+                .forEach(c-> asMaisEficientes.add(c.getId() + ":" + c.getTesouros() + ":" + c.getKm()));
 
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);

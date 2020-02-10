@@ -237,4 +237,9 @@ public class Creature {
     public void incrementarKm(int km) {
         this.km += km;
     }
+
+    public int getKm() {
+        return km;
+    }
 }
+
