@@ -464,10 +464,6 @@ public class FandeisiaGameManager {
                             gastarMoedas(-3);
                             return false;
                         }
-                        if (creature.getFeiticoAplicado().equals("DuplicaAlcance")) {
-                            gastarMoedas(-3);
-                            return false;
-                        }
                         if (!(creature.getTipo().equals("Dragão") || creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
                             gastarMoedas(-3);
                             return false;
