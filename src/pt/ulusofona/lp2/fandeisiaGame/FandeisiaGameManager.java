@@ -462,7 +462,7 @@ public class FandeisiaGameManager {
                             spellName = null;
                             return false;
                         }
-                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
+                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante") || !creature.getTipo().equals("Elfo")) && temBuracoEntre(x, y, irX, irY)) {
                             gastarMoedas(-3);
                             spellName = null;
                             return false;
