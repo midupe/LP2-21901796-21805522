@@ -695,7 +695,6 @@ public class FandeisiaGameManager {
                 .limit(3)
                 .forEach(c-> asMaisEficientes.add(c.getId() + ":" + c.getTesouros() + ":" + c.getKm()));
 
-        System.out.println(asMaisEficientes);
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
