@@ -806,6 +806,11 @@ public class FandeisiaGameManager {
                     creature.setY(irY);
                     tabuleiro[y][x] = 0;
                     tabuleiro[irY][irX] = id;
+                    if (tipo.equals("Druída")) {
+                        if ((y+x)%2 == 0) {
+                            Tesouro tesouro = new Tesouro((-200 - creature.getId()  * 10), x, y, "bronze");
+                        }
+                    }
                     return true;
                 }
             }
