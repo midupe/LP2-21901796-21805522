@@ -205,7 +205,15 @@ public class FandeisiaGameManager {
                     creature.getImagePNG();
                 }
                 creature.resetAlcance();
+                //DEBUG AREA
                 System.out.println(creature);
+                for (int i = 0; i < heightY; i ++) {
+                    for (int j = 0; j < widthX; j++) {
+                        if (getSpell(j,i)!= null) {
+                            System.out.println("DEBUG: Feitico Aplicado = " + getSpell(j, i) + " ao ID " + tabuleiro[i][j]);
+                        }
+                    }
+                }
             }
             if (currentTeam == 10) {
                 if (tesouroApanhadoCurrentTurn > 0) {
@@ -512,11 +520,27 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) {
+        /*
         String feitico = null;
         for (Creature creature : criaturas) {
-            if (tabuleiro[y][x] == creature.getId() && !creature.getFeiticoAplicado().equals("")) {
+            if (tabuleiro[y][x] == creature.getId()) {
                 feitico = creature.getFeiticoAplicado();
             }
+        }
+        if (feitico!= null && feitico.equals("")) {
+            feitico = null;
+        }
+        return feitico;
+         */
+        int id = tabuleiro[y][x];
+        String feitico = "";
+        for (Creature creature : criaturas) {
+            if (id == creature.getId()) {
+                feitico = creature.getFeiticoAplicado();
+            }
+        }
+        if (feitico!= null && feitico.equals("")) {
+            return null;
         }
         return feitico;
     }
