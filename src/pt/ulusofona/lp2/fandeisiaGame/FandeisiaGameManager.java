@@ -108,6 +108,7 @@ public class FandeisiaGameManager {
         tesouros = new ArrayList<>();
         buracos = new ArrayList<>();
         tabuleiro = new int[rows][columns];
+        buracosCount = 0;
         for (String object : content) {
             String[] data = object.split(",");
             int id = Integer.parseInt(data[0].replace("id: ", ""));
@@ -155,7 +156,6 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
         if (!gameIsOver()) {
-            limparFeiticos();
             for (Creature creature : criaturas) {
                 int id = creature.getId();
                 String orientacao = creature.getOrientacao();
@@ -232,6 +232,7 @@ public class FandeisiaGameManager {
                 }
                 currentTeam = 10;
             }
+            limparFeiticos();
             tesouroApanhadoCurrentTurn = 0;
             turnos++;
         }
@@ -320,6 +321,37 @@ public class FandeisiaGameManager {
         }
     }
 
+    public void processarEmpurrar(int x, int y, String spellName){
+        for (Creature creature : criaturas) {
+            if (creature.getX() == x && y == creature.getY()) {
+                int id = creature.getId();
+                if (spellName.equals("EmpurraParaNorte")) {
+                    creature.aplicarEfeito("EmpurraParaNorte");
+                    moverCriatura(id, x, y - 1);
+                    tabuleiro[y][x] = 0;
+                    creature.setNumeroFeiticos();
+                }
+                if (spellName.equals("EmpurraParaEste")) {
+                    creature.aplicarEfeito("EmpurraParaEste");
+                    moverCriatura(id, x + 1, y);
+                    tabuleiro[y][x] = 0;
+                    creature.setNumeroFeiticos();
+                }
+                if (spellName.equals("EmpurraParaSul")) {
+                    creature.aplicarEfeito("EmpurraParaSul");
+                    moverCriatura(id, x, y + 1);
+                    tabuleiro[y][x] = 0;
+                    creature.setNumeroFeiticos();
+                }
+                if (spellName.equals("EmpurraParaOeste")) {
+                    creature.aplicarEfeito("EmpurraParaOeste");
+                    moverCriatura(id, x - 1, y);
+                    tabuleiro[y][x] = 0;
+                    creature.setNumeroFeiticos();
+                }
+            }
+        }
+    }
     public boolean enchant(int x, int y, String spellName) {
         if (spellName == null) {
             return false;
@@ -329,38 +361,26 @@ public class FandeisiaGameManager {
                 int id = creature.getId();
                 if (spellName.equals("EmpurraParaNorte") && y != 0 && !temBuraco(x, y - 1) && !temCriatura(x, y - 1)) {
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurraParaNorte");
-                        moverCriatura(id, x, y - 1);
-                        tabuleiro[y][x] = 0;
-                        creature.setNumeroFeiticos();
+                        processarEmpurrar(x, y, spellName);
                         return true;
                     }
                 }
                 if (spellName.equals("EmpurraParaEste") && x != widthX && !temBuraco(x + 1, y) && !temCriatura(x + 1, y)) {
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurraParaEste");
-                        moverCriatura(id, x + 1, y);
-                        tabuleiro[y][x] = 0;
-                        creature.setNumeroFeiticos();
+                        processarEmpurrar(x, y, spellName);
                         return true;
                     }
                 }
                 if (spellName.equals("EmpurraParaSul") && y != heightY && !temBuraco(x, y + 1) && !temCriatura(x, y + 1)) {
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurraParaSul");
-                        moverCriatura(id, x, y + 1);
-                        tabuleiro[y][x] = 0;
-                        creature.setNumeroFeiticos();
+                        processarEmpurrar(x, y, spellName);
                         return true;
                     }
                 }
 
                 if (spellName.equals("EmpurraParaOeste") && x != 0 && !temBuraco(x - 1, y) && !temCriatura(x - 1, y)) {
                     if (gastarMoedas(1)) {
-                        creature.aplicarEfeito("EmpurraParaOeste");
-                        moverCriatura(id, x - 1, y);
-                        tabuleiro[y][x] = 0;
-                        creature.setNumeroFeiticos();
+                        processarEmpurrar(x, y, spellName);
                         return true;
                     }
                 }
@@ -516,18 +536,6 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) {
-        /*
-        String feitico = null;
-        for (Creature creature : criaturas) {
-            if (tabuleiro[y][x] == creature.getId()) {
-                feitico = creature.getFeiticoAplicado();
-            }
-        }
-        if (feitico!= null && feitico.equals("")) {
-            feitico = null;
-        }
-        return feitico;
-         */
         int id = tabuleiro[y][x];
         String feitico = "";
         for (Creature creature : criaturas) {
@@ -536,6 +544,7 @@ public class FandeisiaGameManager {
             }
         }
         if (feitico!= null && feitico.equals("")) {
+            limparFeiticos();
             return null;
         }
         return feitico;
