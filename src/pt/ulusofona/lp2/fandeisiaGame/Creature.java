@@ -231,7 +231,10 @@ public class Creature {
     }
 
     public int getRacio() {
-        return km/numTesourosEncontrados;
+        if (numTesourosEncontrados!= 0) {
+            return km / numTesourosEncontrados;
+        }
+        return 0;
     }
 
     public void incrementarKm(int km) {
