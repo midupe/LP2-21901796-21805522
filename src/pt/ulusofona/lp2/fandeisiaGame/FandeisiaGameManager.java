@@ -786,7 +786,10 @@ public class FandeisiaGameManager {
                     tabuleiro[irY][irX] = id;
                     if (tipo.equals("Druída")) {
                         if ((y+x)%2 == 0) {
-                            Tesouro tesouro = new Tesouro((-200 - creature.getId()  * 10), x, y, "bronze");
+                            int id_tesouro_druida = -200 - creature.getId()  * 10;
+                            Tesouro tesouro = new Tesouro(id_tesouro_druida, x, y, "bronze");
+                            tabuleiro[y][x] = id_tesouro_druida;
+                            tesouros.add(tesouro);
                         }
                     }
                     return true;
