@@ -454,32 +454,26 @@ public class FandeisiaGameManager {
                         }
                         if (creature.getFeiticoAplicado().equals("DuplicaAlcance")) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
-                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
+                        if (!(creature.getTipo().equals("Dragão") || creature.getTipo().equals("Gigante")) && temCriaturasEntre(x, y, irX, irY)) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
-                        if ((!creature.getTipo().equals("Dragão") || !creature.getTipo().equals("Gigante") || !creature.getTipo().equals("Elfo")) && temBuracoEntre(x, y, irX, irY)) {
+                        if (!(creature.getTipo().equals("Dragão") || creature.getTipo().equals("Gigante") || creature.getTipo().equals("Elfo")) && temBuracoEntre(x, y, irX, irY)) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
                         if (creature.getTipo().equals("Gigante") && temGigante(x, y, irX, irY)) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
                         if (creature.getTipo().equals("Elfo") && buracosCount > 1) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
                         if (temBuraco(irX, irY) || temCriatura(irX, irY)) {
                             gastarMoedas(-3);
-                            spellName = null;
                             return false;
                         }
                         creature.setNumeroFeiticos();
@@ -510,7 +504,6 @@ public class FandeisiaGameManager {
                 }
             }
         }
-        spellName = null;
         return false;
     }
 
