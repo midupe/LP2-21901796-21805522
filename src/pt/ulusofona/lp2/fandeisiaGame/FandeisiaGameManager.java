@@ -759,6 +759,9 @@ public class FandeisiaGameManager {
                 if (tipo.equals("Elfo") && temCriaturasEntre(x, y, irX, irY)) {
                     return false;
                 }
+                if (tipo.equals("Humano") && (temBuracoEntre(x, y, irX, irY) || temCriaturasEntre(x, y, irX, irY))) {
+                    return false;
+                }
                 if (tipo.equals("Gigante") && temGigante(x, y, irX, irY)) {
                     return false;
                 }
@@ -928,6 +931,92 @@ public class FandeisiaGameManager {
         if (irY < y) {
             for (i = irY + 1; i < y; i++) {
                 for (Creature creature : criaturas) {
+                    if (creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean temBuracoEntre(int x, int y, int irX, int irY) {
+        int i = 0;
+        int j = 0;
+        if (x < irX && y < irY) {
+            for (i = x + 1; i < irX; i++) {
+                for (j = y + 1; j < irY; j++) {
+                    for (Buraco creature : buracos) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x > irX && y > irY) {
+            for (i = irX + 1; i < x; i++) {
+                for (j = irY + 1; j < y; j++) {
+                    for (Buraco creature : buracos) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x > irX && y < irY) {
+            for (i = irX + 1; i < x; i++) {
+                for (j = y + 1; j < irY; j++) {
+                    for (Buraco creature : buracos) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x < irX && y > irY) {
+            for (i = x + 1; i < irX; i++) {
+                for (j = irY + 1; j < y; j++) {
+                    for (Buraco creature : buracos) {
+                        if (creature.getX() == i && creature.getY() == j) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        if (x < irX) {
+            for (i = x + 1; i < irX; i++) {
+                for (Buraco creature : buracos) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irX < x) {
+            for (i = irX + 1; i < x; i++) {
+                for (Buraco creature : buracos) {
+                    if (creature.getX() == i && creature.getY() == y) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (y < irY) {
+            for (i = y + 1; i < irY; i++) {
+                for (Buraco creature : buracos) {
+                    if (creature.getX() == x && creature.getY() == i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        if (irY < y) {
+            for (i = irY + 1; i < y; i++) {
+                for (Buraco creature : buracos) {
                     if (creature.getX() == x && creature.getY() == i) {
                         return true;
                     }
