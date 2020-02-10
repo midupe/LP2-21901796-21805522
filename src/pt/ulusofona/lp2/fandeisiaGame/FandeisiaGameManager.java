@@ -203,15 +203,11 @@ public class FandeisiaGameManager {
                         }
                     }
                     creature.getImagePNG();
+
                 }
                 creature.resetAlcance();
-                //DEBUG AREA
-                for (int i = 0; i < heightY; i ++) {
-                    for (int j = 0; j < widthX; j++) {
-                        if (getSpell(j,i)!= null) {
-                            System.out.println("DEBUG: Feitico Aplicado = " + getSpell(j, i) + " ao ID " + tabuleiro[i][j]);
-                        }
-                    }
+                if (!creature.getFeiticoAplicado().equals("Congela4Ever")) {
+                    creature.aplicarEfeito("");
                 }
             }
             if (currentTeam == 10) {
@@ -232,7 +228,6 @@ public class FandeisiaGameManager {
                 currentTeam = 10;
             }
             tesouroApanhadoCurrentTurn = 0;
-            limparFeiticos();
             buracosCount = 0;
             turnos++;
         }
@@ -898,13 +893,6 @@ public class FandeisiaGameManager {
         return false;
     }
 
-    public void limparFeiticos() {
-        for (Creature creature : criaturas) {
-            if (!creature.getFeiticoAplicado().equals("Congela4Ever")) {
-                creature.aplicarEfeito("");
-            }
-        }
-    }
 
     public boolean temCriaturasEntre(int x, int y, int irX, int irY) {
         int i = 0;
