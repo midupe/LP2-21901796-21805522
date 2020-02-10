@@ -634,7 +634,7 @@ public class FandeisiaGameManager {
                 .forEach(c-> asMaisViajadas.add(c.getId() + ":" + c.getKm()));
 
         List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
-        //implementar
+        
 
         List<String> viradosPara = new ArrayList<>();
         long countNorte =
@@ -695,10 +695,10 @@ public class FandeisiaGameManager {
 
         List<String> asMaisEficientes = new ArrayList<>();
         criaturas.stream()
-                .sorted((c2,c1) -> c1.getRacio() - c2.getRacio())
+                .sorted(Comparator.comparingInt(Creature::getRacio))
                 .limit(3)
                 .forEach(c-> asMaisEficientes.add(c.getId() + ":" + c.getTesouros() + ":" + c.getKm()));
-
+        System.out.println(asMaisEficientes);
         statistics.put("as3MaisCarregadas", maisCarregadas);
         statistics.put("as5MaisRicas", maisRicas);
         statistics.put("osAlvosFavoritos", alvosFavoritos);
